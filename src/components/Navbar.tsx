@@ -5,8 +5,8 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Your Name
+        <Typography variant="h5" fontWeight="bold" component="div" sx={{ flexGrow: 1 }}>
+          Jaehoon Pyon
         </Typography>
         <Box>
           <Button color="inherit" component={RouterLink} to="/">

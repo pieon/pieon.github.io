@@ -1,5 +1,6 @@
 import { Container, Typography, Box, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
+import theme from '../theme';
 
 const Home = () => {
   return (
@@ -10,40 +11,26 @@ const Home = () => {
         transition={{ duration: 0.5 }}
       >
         <Box sx={{ my: 4, textAlign: 'center' }}>
-          <Typography variant="h2" component="h1" gutterBottom>
-            Welcome to My Portfolio
-          </Typography>
-          <Typography variant="h5" color="text.secondary" paragraph>
-            Computer Science Student & Aspiring Software Developer
+          <Typography variant="h2" fontWeight="bold" gutterBottom>
+            Hello! I'm Jaehoon Pyon
           </Typography>
         </Box>
 
-        <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
-          <Typography variant="h6" gutterBottom>
+        <Box sx={{ p: 2, mb: 4 }}>
+          <Typography variant="h4" fontWeight="bold" gutterBottom>
             About Me
           </Typography>
-          <Typography paragraph>
-            I am a passionate computer science student with a strong interest in software development
-            and problem-solving. My academic journey has equipped me with a solid foundation in
-            programming, algorithms, and software engineering principles.
+          
+          <Typography variant="body1" fontSize="1.5rem" gutterBottom>
+            I am a 1st year Ph.D. student in Computer Science at Virginia Tech. I am a member of the <a href="https://echolab.cs.vt.edu/" target="_blank" rel="noopener noreferrer">Echo Lab</a>, advised by <a href="https://echolab.cs.vt.edu/sangwonlee/" target="_blank" rel="noopener noreferrer">Prof. Sang Won Lee</a>. My research interests lie in human-computer interaction (HCI), with a focus on sustainable HCI (SHCI) and behavior change.
+            <br />
+            <br />
+            My current research focuses on studying the nuanced relationship between minimalism and technology by interviewing minimalists.
           </Typography>
-          <Typography paragraph>
-            Through this website, you can explore my professional experience, academic achievements,
-            and get in touch with me for potential opportunities.
-          </Typography>
-        </Paper>
+        </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-          <Paper elevation={3} sx={{ p: 3, flex: 1, textAlign: 'center' }}>
-            <Typography variant="h6" gutterBottom>
-              Skills
-            </Typography>
-            <Typography>
-              • Programming Languages: Python, Java, JavaScript<br />
-              • Web Development: React, HTML, CSS<br />
-              • Tools & Technologies: Git, Docker, AWS
-            </Typography>
-          </Paper>
+        <Box sx={{ p: 2, mb: 4 }}>
+          
         </Box>
       </motion.div>
     </Container>
