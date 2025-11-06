@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Roman Ring on Roman Ring</title>
+    <link>http://inoryy.com/</link>
+    <description>Recent content in Roman Ring on Roman Ring</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018--2020</copyright>
+    <lastBuildDate>Sun, 06 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The Next Generation of Machine Learning Tools</title>
+      <link>http://inoryy.com/post/next-gen-ml-tools/</link>
+      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/next-gen-ml-tools/</guid>
+      <description>
+
+&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tools-in-ml-research&#34;&gt;Tools in ML Research&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-need-for-innovation&#34;&gt;A Need for Innovation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-next-generation&#34;&gt;The Next Generation&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#swift-for-tensorflow&#34;&gt;Swift for TensorFlow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#jax&#34;&gt;JAX&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://inoryy.com/js/fix-toc.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s travel back to a simpler time when all everyone talked about in machine learning were SVMs and boosted trees,
+while Andrew Ng introduced neural networks as a neat party hat trick you would probably never use in practice&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:mlcoursera&#34;&gt;&lt;a href=&#34;#fn:mlcoursera&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;The year is 2012, and computer-vision based competition ImageNet is set to be once again won by the newest ensemble of kernel methods.
+That is, of course, until a couple of researchers unveiled AlexNet&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:alexnet&#34;&gt;&lt;a href=&#34;#fn:alexnet&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, having almost two times lower error rate than the competition,
+by using what we now commonly refer to as &amp;ldquo;deep learning.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Many people point to AlexNet as one of the most important scientific breakthroughs of the decade, certainly one that helped change the landscape of ML research.
+However, it does not take much to realize that under the hood, it is &amp;ldquo;just&amp;rdquo; a combination of prior iterative improvements, many dating back to the early nineties.
+At its core, AlexNet is &amp;ldquo;just&amp;rdquo; a modified LeNet&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:lenet&#34;&gt;&lt;a href=&#34;#fn:lenet&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; with more layers, better weight initialization, activation function, and data augmentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;tools-in-ml-research&#34;&gt;Tools in ML Research&lt;/h2&gt;
+
+&lt;p&gt;So what made AlexNet stand out so much? I believe the answer lies in the tools researchers had at their disposal, enabling them to run artificial neural networks on GPU accelerators,
+a relatively novel idea at the time.
+In fact, Alex Krizhevsky&amp;rsquo;s former colleagues recall that many meetings before the competition consisted of Alex describing his progress with the CUDA quirks and features.&lt;/p&gt;
+
+&lt;p&gt;Now let us travel back to 2015 when ML research article submissions started blowing up across the board,
+including (re-)emergence of many now promising approaches such as generative adversarial learning, deep reinforcement learning,
+meta-learning, self-supervised learning, federated learning, neural architecture search, neural differential equations, neural graph networks, and many more.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/770/1*Y-CZdwBP2L_XW1YRLdxt0A.png&#34; alt=&#34;&#34; /&gt;
+&lt;span class=&#34;source&#34;&gt;Image via &lt;a href=&#34;https://medium.com/@dcharrezt/neurips-2019-stats-c91346d31c8f&#34; target=&#34;_blank&#34;&gt;Charrez, D. (2019)&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;One could claim that this is just a natural outcome of the AI hype. However, I believe a significant factor was the emergence of the second generation of general-purpose
+ML frameworks such as TensorFlow&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:tf&#34;&gt;&lt;a href=&#34;#fn:tf&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and PyTorch&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:pt&#34;&gt;&lt;a href=&#34;#fn:pt&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, along with NVIDIA going all-in on AI. The frameworks that existed before, such as Caffe&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:caffe&#34;&gt;&lt;a href=&#34;#fn:caffe&#34;&gt;6&lt;/a&gt;&lt;/sup&gt; and Theano&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:theano&#34;&gt;&lt;a href=&#34;#fn:theano&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;,
+were challenging to work with, and awkward to extend, which slowed down the research and development of novel ideas.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-need-for-innovation&#34;&gt;A Need for Innovation&lt;/h2&gt;
+
+&lt;p&gt;TensorFlow and PyTorch were undoubtedly a net positive, and the teams worked hard to improve the libraries.
+Recently, they delivered TensorFlow 2.0 with a more straightforward interface along with eager mode&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:tfe&#34;&gt;&lt;a href=&#34;#fn:tfe&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;,
+and PyTorch 1.0 with JIT compilation of the computation graph&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ts&#34;&gt;&lt;a href=&#34;#fn:ts&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; as well as support for XLA&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:xla&#34;&gt;&lt;a href=&#34;#fn:xla&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; based accelerators such as TPUs&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:tpu&#34;&gt;&lt;a href=&#34;#fn:tpu&#34;&gt;11&lt;/a&gt;&lt;/sup&gt;.
+However, these frameworks are also beginning to reach their limits, forcing researchers into some paths while closing doors on others, just like their predecessors.&lt;/p&gt;
+
+&lt;p&gt;High-profile DRL projects such as AlphaStar&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:alphastar&#34;&gt;&lt;a href=&#34;#fn:alphastar&#34;&gt;12&lt;/a&gt;&lt;/sup&gt; and OpenAI Five&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:dota&#34;&gt;&lt;a href=&#34;#fn:dota&#34;&gt;13&lt;/a&gt;&lt;/sup&gt; not only utilized large-scale computational clusters
+but also pushed the limits of deep learning architecture components by combining deep transformers, nested recurrent networks, deep residual towers, among others.&lt;/p&gt;
+
+&lt;p&gt;In his &lt;a href=&#34;https://www.thetimes.co.uk/article/demis-hassabis-interview-the-brains-behind-deepmind-on-the-future-of-artificial-intelligence-mzk0zhsp8&#34; target=&#34;_blank&#34;&gt;interview with The Times newspaper&lt;/a&gt;,
+Demis Hassabis has stated that DeepMind will be focusing on applying AI directly for scientific breakthroughs.
+We can already see a glimpse of that shift in direction with some of their recent Nature articles on neuroscience&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:dopamine&#34;&gt;&lt;a href=&#34;#fn:dopamine&#34;&gt;14&lt;/a&gt;&lt;/sup&gt; and protein folding&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:alphafold&#34;&gt;&lt;a href=&#34;#fn:alphafold&#34;&gt;15&lt;/a&gt;&lt;/sup&gt;.
+Even a brief skim through the publications is enough to see that the projects required some unconventional approaches when it comes to engineering.&lt;/p&gt;
+
+&lt;p&gt;At NeurIPS 2019, probabilistic programming and bayesian inference were hot topics, especially uncertainty estimation and causal inference.
+Leading AI researchers presented their visions on what the future of ML might look like.
+Notably, Yoshua Bengio described transitioning to &lt;a href=&#34;https://slideslive.com/38921750/from-system-1-deep-learning-to-system-2-deep-learning&#34; target=&#34;_blank&#34;&gt;system 2 deep learning&lt;/a&gt;
+with out-of-distribution generalization, sparse graph networks, and causal reasoning.&lt;/p&gt;
+
+&lt;p&gt;To summarize, some of the requirements for next-gen ML tools are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fine-grained control flow use&lt;/li&gt;
+&lt;li&gt;non-standard optimization loops&lt;/li&gt;
+&lt;li&gt;higher-order differentiation as a first-class citizen&lt;/li&gt;
+&lt;li&gt;probabilistic programming as a first-class citizen&lt;/li&gt;
+&lt;li&gt;support for multiple heterogeneous accelerators in one model&lt;/li&gt;
+&lt;li&gt;seamless scalability from a single machine to gigantic clusters&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ideally, the tools should also maintain a clean, straightforward, and extensible API, enabling scientists to research and develop their ideas rapidly.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-next-generation&#34;&gt;The Next Generation&lt;/h2&gt;
+
+&lt;p&gt;The good news is that many candidates already exist today, emerging in response to the needs in scientific computing.
+From experimental projects like Zygote.jl&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:zygote&#34;&gt;&lt;a href=&#34;#fn:zygote&#34;&gt;16&lt;/a&gt;&lt;/sup&gt; to even specialized languages, e.g. Halide&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:halide&#34;&gt;&lt;a href=&#34;#fn:halide&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; and DiffTaichi&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:taichi&#34;&gt;&lt;a href=&#34;#fn:taichi&#34;&gt;18&lt;/a&gt;&lt;/sup&gt;.
+Interestingly, many projects draw inspiration from the fundamental works done by researchers in the auto-diff community&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:ad-survey&#34;&gt;&lt;a href=&#34;#fn:ad-survey&#34;&gt;19&lt;/a&gt;&lt;/sup&gt;, which evolved in parallel to ML.&lt;/p&gt;
+
+&lt;p&gt;Many of them were featured at the recent NeurIPS 2019 &lt;a href=&#34;https://program-transformations.github.io/&#34; target=&#34;_blank&#34;&gt;workshop on program transformations&lt;/a&gt;.
+The two I am most excited about are S4TF&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:s4tf&#34;&gt;&lt;a href=&#34;#fn:s4tf&#34;&gt;20&lt;/a&gt;&lt;/sup&gt; and JAX&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:jax&#34;&gt;&lt;a href=&#34;#fn:jax&#34;&gt;21&lt;/a&gt;&lt;/sup&gt;.
+They both tackle the task of making differentiable programming into an integral part of the toolchain, but in their own ways, almost orthogonal to each other.&lt;/p&gt;
+
+&lt;h3 id=&#34;swift-for-tensorflow&#34;&gt;Swift for TensorFlow&lt;/h3&gt;
+
+&lt;p&gt;As the name suggests, S4TF tightly integrates the TensorFlow ML framework with the Swift programming language.
+A vote of confidence for the project is that it is led by Chris Lattner, who has authored LLVM&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:llvm&#34;&gt;&lt;a href=&#34;#fn:llvm&#34;&gt;22&lt;/a&gt;&lt;/sup&gt;, Clang&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:clang&#34;&gt;&lt;a href=&#34;#fn:clang&#34;&gt;23&lt;/a&gt;&lt;/sup&gt;, and Swift itself.&lt;/p&gt;
+
+&lt;p&gt;Swift is a compiled programming language, and one of its primary selling points is
+the powerful type system that is static and inferred. What the last part means in
+simpler terms is that Swift encompasses ease of use in languages like Python
+with code validations and transformations at compile-time, e.g., as in C++.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;let a: Int = 1
+let b = 2
+let c = &amp;quot;3&amp;quot;
+
+print(a + b)         // 3
+print(b + c)         // compilation (!) error
+print(String(b) + c) // 23
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Swift features enable the S4TF team to meet quite a few requirements in the next-generation list
+by having analysis, verification, and optimization of the computation graph executed with efficient algorithms during compilation.&lt;/p&gt;
+
+&lt;p&gt;Crucially, the handling of automatic differentiation is off-loaded to the compiler.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;struct Linear: Differentiable {
+  var w: Float
+  var b: Float
+
+  func callAsFunction(_ x: Float) -&amp;gt; Float {
+    return w * x + b
+  }
+}
+
+let f = Linear(w: 1, b: 2)
+let 𝛁f = gradient(at: f) { f in f(3.0) }
+print(𝛁f) // TangentVector(w: 3.0, b: 1.0)
+
+let 𝛁f2 = gradient(at: f) { f in f([3.0]) } // compilation (!) error
+// error: cannot convert value of type &#39;[Float]&#39; to expected argument type &#39;Float&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course, TensorFlow itself is very well supported in this case.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;import TensorFlow
+
+struct Model: Layer {
+    var conv = Conv2D&amp;lt;Float&amp;gt;(filterShape: (5, 5, 6, 16), activation: relu)
+    var pool = MaxPool2D&amp;lt;Float&amp;gt;(poolSize: (2, 2), strides: (2, 2))
+    var flatten = Flatten&amp;lt;Float&amp;gt;()
+    var dense = Dense&amp;lt;Float&amp;gt;(inputSize: 16 * 5 * 5, outputSize: 100, activation: relu)
+    var logits = Dense&amp;lt;Float&amp;gt;(inputSize: 100, outputSize: 10, activation: identity)
+
+    @differentiable
+    func callAsFunction(_ input: Tensor&amp;lt;Float&amp;gt;) -&amp;gt; Tensor&amp;lt;Float&amp;gt; {
+        return input.sequenced(through: conv, pool, flatten, dense, logits)
+    }
+}
+
+var model = Model()
+let optimizer = RMSProp(for: model, learningRate: 3e-4, decay: 1e-6)
+
+for batch in CIFAR10().trainDataset.batched(128) {
+  let (loss, gradients) = valueWithGradient(at: model) { model in
+    softmaxCrossEntropy(logits: model(batch.data), labels: batch.label)
+  }
+  print(loss)
+  optimizer.update(&amp;amp;model, along: gradients)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On the other hand, if a critical feature is proving to be difficult to implement,
+having intimate knowledge of the whole pipeline is particularly valuable.
+For example, the &lt;a href=&#34;https://mlir.llvm.org/&#34; target=&#34;_blank&#34;&gt;MLIR&lt;/a&gt; compiler framework is a direct result of the S4TF efforts.&lt;/p&gt;
+
+&lt;p&gt;While differentiable programming is the core goal, S4TF is much more than that with a plan to support the
+infrastructure for various next-gen ML tools such as debuggers.
+For example, imagine an IDE warning a user that the custom model computation always results in a zero gradient
+without even executing it.&lt;/p&gt;
+
+&lt;p&gt;Python has an incredible community built around scientific computing and the S4TF team has explicitly
+taken the time to embrace it via interoperability.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;import Python // All that is necessary to enable the interop.
+
+let np = Python.import(&amp;quot;numpy&amp;quot;) // Can import any Python module.
+let plt = Python.import(&amp;quot;matplotlib.pyplot&amp;quot;) 
+
+let x = np.arange(0, 10, 0.01)
+plt.plot(x, np.sin(x)) // Can use the modules as if inside Python.
+plt.show() // Will show the sin plot, just as you would expect.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This project is a significant undertaking and still has some ways to go before being ready for production.
+However, this is a great time to give it a try for both engineers and researchers and potentially contribute to its development.&lt;br /&gt;
+Work on S4TF has already produced interesting scientific advancements at the intersection of programming language and auto-diff theory&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:diff-curry&#34;&gt;&lt;a href=&#34;#fn:diff-curry&#34;&gt;24&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;One thing that especially stands out for me about S4TF is &lt;a href=&#34;https://github.com/tensorflow/community/blob/master/sigs/swift/CHARTER.md&#34; target=&#34;_blank&#34;&gt;their approach to community outreach&lt;/a&gt;.
+For example, the core developers hold weekly design sessions, which are open for anyone interested to join and even participate.&lt;/p&gt;
+
+&lt;p&gt;To learn more about Swift for TensorFlow, here are some useful resources:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://course.fast.ai/part2.html#lesson-13-basics-of-swift-for-deep-learning&#34; target=&#34;_blank&#34;&gt;Fast.ai&amp;rsquo;s Lessons 13 and 14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tensorflow/swift/blob/master/docs/WhySwiftForTensorFlow.md&#34; target=&#34;_blank&#34;&gt;Design Doc: Why Swift For TensorFlow?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://colab.research.google.com/github/tensorflow/swift/blob/master/docs/site/tutorials/model_training_walkthrough.ipynb&#34; target=&#34;_blank&#34;&gt;Model Training Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://colab.research.google.com/github/tensorflow/swift/blob/master/notebooks/blank_swift.ipynb&#34; target=&#34;_blank&#34;&gt;Pre-Built Google Colab Notebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tensorflow/swift-models&#34; target=&#34;_blank&#34;&gt;Swift Models for Popular Architectures in DL and DRL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;jax&#34;&gt;JAX&lt;/h3&gt;
+
+&lt;p&gt;JAX is a collection of function transformations such as just-in-time compilation and automatic differentiation,
+implemented as a thin wrapper over XLA with an API that is essentially a drop-in replacement for NumPy and SciPy.
+In fact, one way to get started with JAX is to think of it as an accelerator backed NumPy.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import jax.numpy as np
+
+# Will be seamlessly executed on an accelerator such as GPU/TPU.
+x, w, b = np.ones((3, 1000, 1000))
+y = np.dot(w, x) + b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course, in reality, JAX is much more than that. To many, it might seem that the project appeared out of thin air,
+but the truth is that it is an evolution of over five years of research spanning across three projects.
+Notably, JAX emerged from &lt;a href=&#34;https://github.com/hips/autograd&#34; target=&#34;_blank&#34;&gt;Autograd&lt;/a&gt; &amp;ndash; a research endeavor into AD of native program code
+&amp;ndash; generalizing on its core ideas to support arbitrary transformations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def f(x):
+  return np.where(x &amp;gt; 0, x, x / (1 + np.exp(-x)))
+
+# Note: same singular style for the API entry points.
+jit_f = jax.jit(f) # Will be 10-100x faster, depending on the accelerator.
+grad_f = jax.grad(f) # Will work as expected, handling both branches. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Aside from the &lt;code&gt;grad&lt;/code&gt; and &lt;code&gt;jit&lt;/code&gt; discussed above, there are two more excellent examples of JAX transformations, helping
+users to batch-process their data via auto-vectorization of batch dimension (&lt;code&gt;vmap&lt;/code&gt;) or across multiple devices (&lt;code&gt;pmap&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a = np.ones((100, 300))
+
+def g(vec):
+  return np.dot(a, vec)
+
+# Suppose `z` is a batch of 10 samples of 1 x 300 vectors.
+z = np.ones((10, 300))
+
+g(z) # Will not work due to (batch) dimension mismatch (100x300 x 10x300).
+
+vec_g = jax.vmap(g)
+vec_g(z) # Will work, efficiently propagating through batch dimension.
+
+# Manual solution requires &amp;quot;playing&amp;quot; with matrix transpositions.
+np.dot(a, z.T)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These features might seem confusing at first, but after some practice, they turn into an irreplaceable part of a researcher&amp;rsquo;s toolbox.
+They have even inspired recent development of similar functionality in both &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/vectorized_map&#34; target=&#34;_blank&#34;&gt;TensorFlow&lt;/a&gt;
+and &lt;a href=&#34;https://twitter.com/apaszke/status/1219886260296261632&#34; target=&#34;_blank&#34;&gt;PyTorch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the time being, JAX authors seem to be sticking to their core competency when it comes to developing new features.
+Of course, a reasonable approach but is also the cause for one of its main drawbacks:
+lack of built-in neural network components, aside from the proof-of-concept &lt;a href=&#34;https://github.com/google/jax/blob/master/jax/experimental/stax.py&#34; target=&#34;_blank&#34;&gt;Stax&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Adding higher-level features is something where end-users can potentially step in and contribute, and given JAX&amp;rsquo;s solid foundation,
+the task might be easier than it seems. For example, there are now two &amp;ldquo;competing&amp;rdquo; libraries built on top of JAX,
+both developed by Google researchers, with differing approaches:
+&lt;a href=&#34;https://github.com/google/trax&#34; target=&#34;_blank&#34;&gt;Trax&lt;/a&gt; and &lt;a href=&#34;https://github.com/google-research/flax/tree/prerelease&#34; target=&#34;_blank&#34;&gt;Flax&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Trax approach is functional.
+# Note: params are stored outside and `forward` is &amp;quot;pure&amp;quot;.
+
+import jax.numpy as np
+from trax.layers import base
+
+class Linear(base.Layer):
+  def __init__(self, num_units, init_fn):
+    super().__init__()
+    self.num_units = num_units
+    self.init_fn = init_fn
+
+  def forward(self, x, w):
+    return np.dot(x, w)
+
+  def new_weights(self, input_signature):
+    w = self.init_fn((input_signature.shape, self._num_units))
+    return w
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Flax approach is object-oriented, closer to PyTorch style.
+
+import jax.numpy as np
+from flax import nn
+
+class Linear(nn.Module):
+  def apply(self, x, num_units, init_fn):
+    W = self.param(&#39;W&#39;, (x.shape[-1], num_units), init_fn)
+    return np.dot(x, W)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Even though some might prefer a singular way, endorsed by core developers,
+having a diversity of methods is a good indicator that the technology is sound.&lt;/p&gt;
+
+&lt;p&gt;There are also some directions in research where JAX features especially shine.
+For example, in meta-learning, one common approach to training a meta-learner is by computing the gradients of the inputs.
+An alternative method for computing gradients &amp;ndash; forward-mode auto-differentiation &amp;ndash; is necessary to solve this task efficiently,
+which is supported out-of-the-box in JAX but is either non-existent or an experimental feature in other libraries.&lt;/p&gt;
+
+&lt;p&gt;JAX is perhaps more polished and production-ready than its S4TF counter-part and some of the recent developments coming out of Google Research
+rely on it, such as Reformer &amp;ndash; a memory-efficient Transformer model capable of handling context windows of a million words while fitting on a consumer GPU&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:reformer&#34;&gt;&lt;a href=&#34;#fn:reformer&#34;&gt;25&lt;/a&gt;&lt;/sup&gt;,
+and Neural Tangents &amp;ndash; a library for complex neural networks of infinite width&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:neural-tangents&#34;&gt;&lt;a href=&#34;#fn:neural-tangents&#34;&gt;26&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;The library is further embraced by the broader scientific computing community, used for works in molecular dynamics&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:jax-md&#34;&gt;&lt;a href=&#34;#fn:jax-md&#34;&gt;27&lt;/a&gt;&lt;/sup&gt;,
+probabilistic programming&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:numpyro&#34;&gt;&lt;a href=&#34;#fn:numpyro&#34;&gt;28&lt;/a&gt;&lt;/sup&gt;, and constrained optimization&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:fax&#34;&gt;&lt;a href=&#34;#fn:fax&#34;&gt;29&lt;/a&gt;&lt;/sup&gt;, among others.&lt;/p&gt;
+
+&lt;p&gt;To get started with JAX and for further reading, please review the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://slideslive.com/38922046/program-transformations-for-ml-3&#34; target=&#34;_blank&#34;&gt;Talk: Overview by Skye Wanderman-Milne, a core developer&lt;/a&gt; (starts at 44:26)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://jax.readthedocs.io/en/latest/notebooks/quickstart.html&#34; target=&#34;_blank&#34;&gt;Notebook: Quickstart, going over fundamental features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/google/jax/tree/master/cloud_tpu_colabs&#34; target=&#34;_blank&#34;&gt;Notebook: Cloud TPU Playground&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://colinraffel.com/blog/you-don-t-know-jax.html&#34; target=&#34;_blank&#34;&gt;Blog: You don&amp;rsquo;t know JAX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rlouf.github.io/post/jax-random-walk-metropolis/&#34; target=&#34;_blank&#34;&gt;Blog: Massively parallel MCMC with JAX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.evjang.com/2019/11/jaxpt.html&#34; target=&#34;_blank&#34;&gt;Blog: Differentiable Path Tracing on the GPU/TPU&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;ML research is starting to hit the limits of the tools we currently have at our disposal,
+but some new and exciting candidates are right around the corner, such as JAX and S4TF.
+If you feel yourself to be more of an engineer than a researcher and wonder whether there is even a place for you at the ML table,
+hopefully, the answer is clear: right now is the perfect time to get into it.
+Moreover, you have an opportunity to participate on the ground floor of the next generation of ML tools!&lt;/p&gt;
+
+&lt;p&gt;Note that this does not mean TensorFlow or PyTorch are going anywhere, not in the near future. There is still much value in these mature,
+battle-tested libraries. After all, both JAX and S4TF have parts of TensorFlow under their hoods.
+But if you are about to start a new research project or if you feel that you are working around library
+limitations more than on your ideas, then maybe give them a try!&lt;/p&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:mlcoursera&#34;&gt;Ng, A. (2011). Week 4: Neural Networks. COURSERA: Machine Learning.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:mlcoursera&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:alexnet&#34;&gt;Krizhevsky, A., Sutskever, I., &amp;amp; Hinton, G. E. (2012). Imagenet classification with deep convolutional neural networks. In advances in Neural Information Processing Systems.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:alexnet&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:lenet&#34;&gt;LeCun, Y., Bottou, L., Bengio, Y., &amp;amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. Proceedings of the IEEE.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:lenet&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:tf&#34;&gt;Abadi, M., Barham, P., Chen, J., Chen, Z., Davis, A., Dean, J., &amp;hellip; &amp;amp; Kudlur, M. (2016). Tensorflow: A system for large-scale machine learning. In 12th USENIX Symposium on Operating Systems Design and Implementation.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:tf&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:pt&#34;&gt;Paszke, A., Gross, S., Massa, F., Lerer, A., Bradbury, J., Chanan, G., &amp;hellip; &amp;amp; Desmaison, A. (2019). PyTorch: An imperative style, high-performance deep learning library. In Advances in Neural Information Processing Systems.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:pt&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:caffe&#34;&gt;Jia, Y., Shelhamer, E., Donahue, J., Karayev, S., Long, J., Girshick, R., &amp;hellip; &amp;amp; Darrell, T. (2014). Caffe: Convolutional architecture for fast feature embedding. In Proceedings of the 22nd ACM international conference on Multimedia.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:caffe&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:theano&#34;&gt;Bergstra, J., Breuleux, O., Bastien, F., Lamblin, P., Pascanu, R., Desjardins, G., &amp;hellip; &amp;amp; Bengio, Y. (2010). Theano: a CPU and GPU math expression compiler. In Proceedings of the Python for scientific computing conference.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:theano&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:tfe&#34;&gt;Agrawal, A., Modi, A. N., Passos, A., Lavoie, A., Agarwal, A., Shankar, A., &amp;hellip; &amp;amp; Cai, S. (2019). Tensorflow eager: A multi-stage, python-embedded dsl for machine learning. arXiv preprint arXiv:1903.01855.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:tfe&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:ts&#34;&gt;Contributors, PyTorch. (2018). Torch script. URL &lt;a href=&#34;https://pytorch.org/docs/stable/jit.html&#34; target=&#34;_blank&#34;&gt;https://pytorch.org/docs/stable/jit.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ts&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:xla&#34;&gt;Leary, C., &amp;amp; Wang, T. (2017). XLA: TensorFlow, compiled. TensorFlow Dev Summit.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:xla&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:tpu&#34;&gt;Jouppi, N. P., Young, C., Patil, N., Patterson, D., Agrawal, G., Bajwa, R., &amp;hellip; &amp;amp; Boyle, R. (2017). In-datacenter performance analysis of a tensor processing unit. In 44th Annual International Symposium on Computer Architecture.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:tpu&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:alphastar&#34;&gt;Vinyals, O., Babuschkin, I., Czarnecki, W. M., Mathieu, M., Dudzik, A., Chung, J., &amp;hellip; &amp;amp; Silver, D. (2019). Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature. doi:10.1038/s41586-019-1724-z
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:alphastar&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:dota&#34;&gt;Berner, C., Brockman, G., Chan, B., Cheung, V., Dębiak, P., Dennison, C., &amp;hellip; &amp;amp; Józefowicz, R. (2019). Dota 2 with Large Scale Deep Reinforcement Learning. arXiv preprint arXiv:1912.06680.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:dota&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:dopamine&#34;&gt;Dabney, W., Kurth-Nelson, Z., Uchida, N., Starkweather, C. K., Hassabis, D., Munos, R., &amp;amp; Botvinick, M. (2020). A distributional code for value in dopamine-based reinforcement learning. Nature. doi: 10.1038/s41586-019-1924-6
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:dopamine&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:alphafold&#34;&gt;Senior, A., Evans, R., Jumper, J., Kirkpatrick, J., Sifre, L., Green, T., &amp;hellip; &amp;amp; Penedones, H. (2020). Improved protein structure prediction using potentials from deep learning. Nature.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:alphafold&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:zygote&#34;&gt;Innes, M. (2018). Don&amp;rsquo;t Unroll Adjoint: Differentiating SSA-Form Programs. arXiv preprint arXiv:1810.07951.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:zygote&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:halide&#34;&gt;Ragan-Kelley, J., Barnes, C., Adams, A., Paris, S., Durand, F., &amp;amp; Amarasinghe, S. (2013). Halide: a language and compiler for optimizing parallelism, locality, and recomputation in image processing pipelines. In ACM Sigplan Notices.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:halide&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:taichi&#34;&gt;Hu, Y., Anderson, L., Li, T. M., Sun, Q., Carr, N., Ragan-Kelley, J., &amp;amp; Durand, F. (2019). DiffTaichi: Differentiable Programming for Physical Simulation. arXiv preprint arXiv:1910.00935.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:taichi&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:ad-survey&#34;&gt;Baydin, A. G., Pearlmutter, B. A., Radul, A. A., &amp;amp; Siskind, J. M. (2017). Automatic differentiation in machine learning: a survey. The Journal of Machine Learning Research.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:ad-survey&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:s4tf&#34;&gt;Wei, R., &amp;amp; Zheng, D. (2018). Swift for TensorFlow. URL &lt;a href=&#34;https://github.com/tensorflow/swift&#34; target=&#34;_blank&#34;&gt;https://github.com/tensorflow/swift&lt;/a&gt;.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:s4tf&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:jax&#34;&gt;Bradbury, J., Frostig, R., Hawkins, P., Johnson, M. J., Leary, C., Maclaurin, D., &amp;amp; Wanderman-Milne, S (2018). JAX: composable transformations of Python+ NumPy programs. URL &lt;a href=&#34;https://github.com/google/jax&#34; target=&#34;_blank&#34;&gt;https://github.com/google/jax&lt;/a&gt;.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:jax&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:llvm&#34;&gt;Lattner, C. (2002). LLVM: An infrastructure for multi-stage optimization. Masters thesis, University of Illinois.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:llvm&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:clang&#34;&gt;Lattner, C. (2008). LLVM and Clang: Next generation compiler technology. In The BSD conference.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:clang&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:diff-curry&#34;&gt;Vytiniotis, D., Belov, D., Wei, R., Plotkin, G., &amp;amp; Abadi, M. (2019). The Differentiable Curry.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:diff-curry&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:reformer&#34;&gt;Kitaev, N., Kaiser, L., and Levskaya, A. (2020). Reformer: The Efficient Transformer. In International Conference on Learning Representations.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:reformer&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:neural-tangents&#34;&gt;Novak, R., Xiao, L., Hron, J., Lee, J., Alemi, A., Sohl-dickstein, J., &amp;amp; Schoenholz, S. (2020). Neural Tangents: Fast and Easy Infinite Neural Networks in Python. In International Conference on Learning Representations.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:neural-tangents&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:jax-md&#34;&gt;Schoenholz, S., &amp;amp; Cubuk, E. (2020). JAX, MD End-to-End Differentiable, Hardware Accelerated, Molecular Dynamics in Pure Python. Bulletin of the American Physical Society.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:jax-md&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:numpyro&#34;&gt;Phan, D., Pradhan, N., &amp;amp; Jankowiak, M. (2019). Composable Effects for Flexible and Accelerated Probabilistic Programming in NumPyro.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:numpyro&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:fax&#34;&gt;Bacon, P. L., Schäfer, F., Gehring, C., Anandkumar, A., &amp;amp; Brunskill, E. A Lagrangian Method for Inverse Problems in Reinforcement Learning. In Advances in Neural Information Processing Systems.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:fax&#34;&gt;↑&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>StarCraft II: Next Big Thing in AI</title>
+      <link>http://inoryy.com/post/starcraft2-next-big-thing-ai/</link>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/starcraft2-next-big-thing-ai/</guid>
+      <description>
+
+&lt;p&gt;Couple of days ago out of the blue DeepMind announced a StarCraft II related event, with many of the employees being quite excited about it on twitter. In just a few hours we will see what DeepMind has in store for us, but in the meantime let&amp;rsquo;s take a step back and review how we got here and why it is so important.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: the (amazing) event has finished and DeepMind have released a &lt;a href=&#34;https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/&#34; target=&#34;_blank&#34;&gt;very detailed write-up&lt;/a&gt;. See below for my thoughts on the event and the write-up.&lt;/p&gt;
+
+&lt;h1 id=&#34;deepmind&#34;&gt;DeepMind&lt;/h1&gt;
+
+&lt;p&gt;At the end of 2013, DeepMind was a small and relatively unknown startup, founded three years prior with one simple goal: &amp;ldquo;to solve intelligence&amp;rdquo;. Although not yet famous with the general public, they have made a lot of noise in the world of deep reinforcement learning by introducing &lt;a href=&#34;https://deepmind.com/research/dqn/&#34; target=&#34;_blank&#34;&gt;DQN&lt;/a&gt; - an algorithm, capable of matching or even surpassing humans at playing the Atari video games, while observing the game from raw pixels similar to how a human would. In the early 2014 DeepMind was bought by Google Inc. for $500 million, many speculating that deal was ensured by this one achievement.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;https://raw.githubusercontent.com/kuz/DeepMind-Atari-Deep-Q-Learner/master/gifs/breakout.gif&#34;  /&gt;
+  &lt;figcaption style=&#34;text-align: center;&#34;&gt;
+      &lt;small&gt;Atari game of Breakout, played by DQN agent. &lt;a href=&#34;https://github.com/kuz/DeepMind-Atari-Deep-Q-Learner&#34;&gt;Source&lt;/a&gt;.&lt;/small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In March of 2016 DeepMind did it again, with their &lt;a href=&#34;https://deepmind.com/research/alphago/&#34; target=&#34;_blank&#34;&gt;AlphaGo&lt;/a&gt; program decisively winning against Go world champion Lee Sedol, who held the title for a great number of years. While in hindsight this seems as a sure thing, three years ago this win came almost out of nowhere, with many researchers at the time were predicting that AI will not match human experts for another 10 years at least.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;https://i.imgur.com/NNIEdt5.jpg&#34;  /&gt;
+  &lt;figcaption style=&#34;text-align: center;&#34;&gt;
+      &lt;small&gt;DeepMind&#39;s AlphaGo winning vs Lee Sedol. &lt;a href=&#34;https://www.engadget.com/2016/03/12/watch-alphago-vs-lee-sedol-round-3-live-right-now/&#34;&gt;Source&lt;/a&gt;.&lt;/small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1 id=&#34;starcraft-ii&#34;&gt;StarCraft II&lt;/h1&gt;
+
+&lt;p&gt;Shortly after DeepMind&amp;rsquo;s AlphaGo victory, DeepMind were already prepared to announce the next challenge they will be tackling: the StarCraft II video game. StarCraft II is a real-time strategy game that requires making split second decisions on strategical, tactical, and economical levels, with short-term and long-term goals, throughout the whole duration of the game. Together with its predecessor StarCraft: Brood War, it has a rich competitive e-sports history spanning over 20 years, and is actively played by millions to this day.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;https://i.imgur.com/yaOixgL.png&#34;  /&gt;
+  &lt;figcaption style=&#34;text-align: center;&#34;&gt;
+      &lt;small&gt;Serral securing his world championship title at WCS 2018. &lt;a href=&#34;https://youtu.be/ZO9kqMGK190&#34;&gt;Source&lt;/a&gt;.&lt;/small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;With much bigger state and action spaces, real-time component, partial observability, and longer game duration, this is a much more difficult task than any attempted before. In fact many AI researchers have actually attempted to tackle it, notably the StarCraft: Brood War bot &lt;a href=&#34;https://arstechnica.com/gaming/2011/01/skynet-meets-the-swarm-how-the-berkeley-overmind-won-the-2010-starcraft-ai-competition/&#34; target=&#34;_blank&#34;&gt;OverMind&lt;/a&gt; was a collaborative effort of many talented scientists. Yet, when pitted against human players, the AI champion would be easily defeated even by relative novices to the game.&lt;/p&gt;
+
+&lt;p&gt;This massive challenge alone wasn&amp;rsquo;t enough for DeepMind researchers, they decided to go one step further. They wanted to not only challenge human experts, but do so &amp;ldquo;on their terms&amp;rdquo;. The AI will be observing the game in a similar way to humans, through image-like features, and will be acting by emulating keyboard and mouse commands as close as possible.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;https://i.imgur.com/9FQkrkJ.jpg&#34;  /&gt;
+  &lt;figcaption style=&#34;text-align: center;&#34;&gt;
+      &lt;small&gt;On the right: StarCraft II game as seen by the AI. &lt;a href=&#34;https://deepmind.com/blog/deepmind-and-blizzard-open-starcraft-ii-ai-research-environment/&#34;&gt;Source&lt;/a&gt;.&lt;/small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Furthermore, the AI is limited in many aspects to match human experiences, e.g. it is allowed to take a limited number of actions per minute (APM) and can only access the same information a human would see on the screen or minimap. This means that the AI must learn to use in-game camera in order to effectively play.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;https://storage.googleapis.com/deepmind-live-cms/documents/Oriol-Fig-Anim-170809-Optimised-r03.gif&#34;  /&gt;
+  &lt;figcaption style=&#34;text-align: center;&#34;&gt;
+      &lt;small&gt;StarCraft II AI emulates actions as close to humans as possible. &lt;a href=&#34;https://deepmind.com/blog/deepmind-and-blizzard-open-starcraft-ii-ai-research-environment/&#34;&gt;Source&lt;/a&gt;.&lt;/small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1 id=&#34;the-next-big-thing-in-ai&#34;&gt;The Next Big Thing in AI&lt;/h1&gt;
+
+&lt;p&gt;A StarCraft II player might wonder what is special about this if there were relatively good AIs built into the game from release. The AI you encounter in-game acts based on some pre-defined set of rules, which means it can only play as well as the person who programmed it, reacting only to foreseen events. This makes the AI inflexible, and easy to exploit, among other things.&lt;/p&gt;
+
+&lt;p&gt;In contrast, the AI DeepMind is working on learns the game by itself, essentially from scratch. At each step all it has is the game state it observed, the actions it can take, and some reward stimulus it received for a previous action. In general the approach is called reinforcement learning and &lt;a href=&#34;http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; I give a brief overview of the field.&lt;/p&gt;
+
+&lt;p&gt;To get a feel for what it&amp;rsquo;s like for an RL agent to &amp;ldquo;learn&amp;rdquo; the game, here is a video of an agent attempting to tackle a set of minigames released by DeepMind. On the left you can see an agent that just started the process and is exploring all the various actions it can take, and on the right is the same agent after a fair bit of such experiments (about 50 million steps on average).&lt;/p&gt;
+
+&lt;p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/gEyBzcPU5-w&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;&lt;/p&gt;
+
+&lt;p&gt;An outside reader might wonder why AI researchers focus so much on games to begin with. The answer is simple: real-world is just too complex for an AI system at this point - one must first learn to walk before he gets to fly. Specifically, games have easily defined rules that can be described to an AI system and are typically easy to run in parallel on a computer, speeding up the learning process.&lt;/p&gt;
+
+&lt;p&gt;This however does not mean that current work will be useless in the future. For example, while &amp;ldquo;playing&amp;rdquo; with StarCraft II, DeepMind researchers produced a number of general-purpose results such as the &lt;a href=&#34;https://deepmind.com/blog/population-based-training-neural-networks/&#34; target=&#34;_blank&#34;&gt;population based training&lt;/a&gt;, and &lt;a href=&#34;https://openreview.net/forum?id=HkxaFoC9KQ&#34; target=&#34;_blank&#34;&gt;relational deep reinforcement learning&lt;/a&gt;. So while developing an AI capable of winning in StarCraft II with human-like restrictions &lt;em&gt;probably&lt;/em&gt; won&amp;rsquo;t give us &lt;a href=&#34;https://en.wikipedia.org/wiki/Artificial_general_intelligence&#34; target=&#34;_blank&#34;&gt;AGI&lt;/a&gt;, it will definitely bring us an inch closer.&lt;/p&gt;
+
+&lt;h1 id=&#34;predictions-and-speculations&#34;&gt;Predictions and Speculations&lt;/h1&gt;
+
+&lt;p&gt;In this section I will attempt to predict some of the things we will see at the event, along with the nitty-gritty details &amp;ldquo;under the hood&amp;rdquo; of the AI, which might get a bit technical. Note that I have no insider information, this is simply my guesses.&lt;/p&gt;
+
+&lt;p&gt;For the event itself I believe it will be a Protoss vs Protoss showmatch between DeepMind&amp;rsquo;s AI and some high level player, either ex-pro or possibly even current pro, however not best of the best tier. I would be &lt;em&gt;really&lt;/em&gt; surprised if they are already at a level to challenge world champions.&lt;/p&gt;
+
+&lt;p&gt;The core algorithm they will employ will be an &lt;code&gt;actor-critic&lt;/code&gt; variant called &lt;a href=&#34;https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/&#34; target=&#34;_blank&#34;&gt;IMPALA&lt;/a&gt;, fused with &lt;code&gt;attention&lt;/code&gt; mechanism as described in &lt;a href=&#34;https://openreview.net/forum?id=HkxaFoC9KQ&#34; target=&#34;_blank&#34;&gt;Relational DRL&lt;/a&gt;. Network architecture will have &lt;code&gt;residual + convolutional&lt;/code&gt; state encoder component and a number of &lt;code&gt;Conv LSTM&lt;/code&gt; blocks generating the policy. It will also have a fair bit of &lt;code&gt;imitation learning&lt;/code&gt; based pre-training prior to the DRL loop.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;IMPALA&lt;/code&gt; algorithm is essentially a distributed, asyncronous version of &lt;code&gt;A2C&lt;/code&gt; I&amp;rsquo;ve described in &lt;a href=&#34;http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; blog with a number of fixes (e.g. importance weighting) to address its &amp;ldquo;off-policyness&amp;rdquo; - the fact that samples are gathered with a different policy than the one being currently trained. If you&amp;rsquo;re familiar with &lt;a href=&#34;https://blog.openai.com/openai-five/&#34; target=&#34;_blank&#34;&gt;openAI Five&lt;/a&gt; then the core idea is similar to their asyncronous PPO: a (massively) distributed advantage actor-critic variant with tricks to correct for the distributional drift.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;attention&lt;/code&gt; mechanism has revolutionized the world of NLP, especially after the &amp;ldquo;&lt;a href=&#34;https://arxiv.org/abs/1706.03762&#34; target=&#34;_blank&#34;&gt;Attention is All You Need&lt;/a&gt;&amp;rdquo; article came out. In short, if we&amp;rsquo;re dealing with sequential input / output then attention mechanism acts as importance weight for items in the given sequence when generating the next output. In NLP this is most often used for machine translation to give attention to words at different parts of the sentence. In StarCraft II this could be used to ensure the agent can quickly switch between tactical and strategical decision making. DeepMind has recently applied it to DRL in their &lt;a href=&#34;https://openreview.net/forum?id=HkxaFoC9KQ&#34; target=&#34;_blank&#34;&gt;Relational DRL&lt;/a&gt; article.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;residual + convolutional&lt;/code&gt; architecture makes sense to use given our state space, whereas &lt;code&gt;Conv LSTM&lt;/code&gt; cells (NB! different from &lt;em&gt;CNN&lt;/em&gt; LSTM) are starting to gain traction in DRL world, especially when observations are rich with spatial information.&lt;/p&gt;
+
+&lt;p&gt;During Blizzcon 2018 presentation Oriol Vinyals mentioned that they&amp;rsquo;ve used &lt;code&gt;imitation learning&lt;/code&gt; for their agent - and it of course make sense, given that Blizzard is providing free access (to everybody!) to their massive dataset of replays. Of course it would be impossible to succesfully train a full agent from replays alone, but I think it&amp;rsquo;s reasonable to use it for NN weights pre-training.&lt;/p&gt;
+
+&lt;p&gt;I also wouldn&amp;rsquo;t be surprised if instead of fully end-to-end approach DeepMind will rely on something modular, e.g. as described &lt;a href=&#34;https://arxiv.org/abs/1811.03555&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, where individual modules are responsible for specific subsets of the game. Specifically, perhaps DeepMind relies on pre-defined rulesets for scouting and makes use of a simplified game engine for battle simulations that are used in MCTS solver to determine whether they should attack or fall back.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Hopefully you&amp;rsquo;re now as excited as I am about the upcoming event. Whether the AI is fully end to end or not and whether they will be able to win vs human experts or not, it is still a massive endeavor and should provide for a good show. And if you&amp;rsquo;d like to get into developing StarCraft II based AIs yourself, join our &lt;a href=&#34;https://discordapp.com/invite/Emm5Ztz&#34; target=&#34;_blank&#34;&gt;SC2AI community on discord&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h1 id=&#34;post-event-write-up&#34;&gt;Post-Event Write-Up&lt;/h1&gt;
+
+&lt;p&gt;The stream was very exciting to watch, both as a player and a researcher. It was funny to see AlphaStar opt for wild strategies and then come out on top. It was also interesting to see it make mistakes such as killing its own units, very AI and human-like behavior at the same time.&lt;/p&gt;
+
+&lt;p&gt;To me the most impressive was the micro, and not just due to its ability to make split second decisions. The way AlphaStar knew how to pull back damaged stalkers to regenerate shields, the way it pulled its workers when it saw Oracles - really mind boggling that a single end-to-end neural network is capable of such a rich variety of tactical and somewhat long-term decision-making.&lt;/p&gt;
+
+&lt;p&gt;However, AlphaStar is still quite far from conquering StarCraft II universe. First, while Mana is no doubt a great player, he is not quite world champion caliber. Second, this is still a single matchup, whereas any human player would be expected to play vs all three races on the same level. Third, I&amp;rsquo;m not sure how I feel about having players go against a pool of AlphaStar(s) - I think it definitely makes sense to use for training, but during inference I&amp;rsquo;d prefer to see a single version used throughout the matches. Overall I would say AlphaStar right now is closer to the AlphaGo version that played vs Fan Hui than the one that won vs Lee Sedol.&lt;/p&gt;
+
+&lt;p&gt;Seems that I&amp;rsquo;ve correctly predicted the match-up and level of play, along with some of the approaches. Specifically, AlphaStar does indeed rely on &lt;code&gt;imitation learning&lt;/code&gt;, &lt;code&gt;IMPALA&lt;/code&gt;, and &lt;code&gt;attention&lt;/code&gt; mechanism, though not quite as described in Relational DRL article. They also indeed use &lt;code&gt;LSTM&lt;/code&gt;, but I am not so sure with regards to &lt;code&gt;convolutional&lt;/code&gt; layers - there seems to be a bit of confusion as to what interface they ended up using. I&amp;rsquo;ve also briefly mentioned &lt;code&gt;population based training&lt;/code&gt; - seems that DeepMind uses an advanced variant of it, hopefully we will see an article about it soon.&lt;/p&gt;
+
+&lt;p&gt;Of the things I&amp;rsquo;ve missed is the &lt;a href=&#34;https://arxiv.org/abs/1706.03762&#34; target=&#34;_blank&#34;&gt;transformer&lt;/a&gt; body, which is a state-of-the-art architecture in machine translation. Very surprised to see it applied in DRL. They also use a relatively novel baseline for the &lt;code&gt;advantage function&lt;/code&gt; in the PG loss, which they pulled from the &lt;a href=&#34;https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf&#34; target=&#34;_blank&#34;&gt;Counterfactual Multi-Agent Policy Gradients&lt;/a&gt; article. This is noteworthy because for the longest time the value estimate of next state for baseline was the go-to approach of pretty much everybody in DRL.&lt;/p&gt;
+
+&lt;p&gt;Finally, they apply &lt;a href=&#34;https://arxiv.org/abs/1506.03134&#34; target=&#34;_blank&#34;&gt;pointer network&lt;/a&gt; to the policy output, most likely as an efficient way to deal with variable length of action arguments. To me the use of &lt;code&gt;pointer networks&lt;/code&gt; was quite surprising and somewhat ironic - I have actually &lt;a href=&#34;http://inoryy.com/files/pointer_networks_essay.pdf&#34; target=&#34;_blank&#34;&gt;written an essay&lt;/a&gt; on this article and while it was an interesting subject, it never crossed my mind it could be applied in such a way to DRL policies. Although in retrospect I guess it makes sense.&lt;/p&gt;
+
+&lt;p&gt;During training they also rely on &lt;a href=&#34;http://proceedings.mlr.press/v80/oh18b/oh18b.pdf&#34; target=&#34;_blank&#34;&gt;self-imitation&lt;/a&gt; and &lt;code&gt;experience replay&lt;/code&gt;, which is quite interesting - seems they have finally perfected the combination of &lt;code&gt;actor-critic methods&lt;/code&gt;, which are traditionally seen as &lt;code&gt;on-policy&lt;/code&gt;, with the benefits of &lt;code&gt;off-policy&lt;/code&gt; algorithms. Finally, they use &lt;a href=&#34;https://arxiv.org/pdf/1511.06295.pdf&#34; target=&#34;_blank&#34;&gt;policy distillation&lt;/a&gt; which is probably how they were able to fit the final agents into a single machine for inference.&lt;/p&gt;
+
+&lt;p&gt;If by now your head is spinning from all the terminology, don&amp;rsquo;t worry - mine is too. The takeaway message is that it took an impressive amount of very advanced approaches to achieve the level of play we have seen today and I am curious to see what happens next.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Reinforcement Learning With TensorFlow 2.1</title>
+      <link>http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/</link>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/</guid>
+      <description>
+
+&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#setup&#34;&gt;Setup&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#gpu-support&#34;&gt;GPU Support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#reinforcement-learning&#34;&gt;Reinforcement Learning&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#deep-reinforcement-learning&#34;&gt;Deep Reinforcement Learning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#asynchronous-advantage-actor-critic&#34;&gt;(Asynchronous) Advantage Actor-Critic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#advantage-actor-critic-with-tensorflow-2-1&#34;&gt;Advantage Actor-Critic With TensorFlow 2.1&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#policy-value-models-via-keras-api&#34;&gt;Policy &amp;amp; Value Models via Keras API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#agent-interface&#34;&gt;Agent Interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#loss-objective-function&#34;&gt;Loss / Objective Function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-training-loop&#34;&gt;The Training Loop&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#results&#34;&gt;Results&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#static-computational-graph&#34;&gt;Static Computational Graph&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-more-thing&#34;&gt;One More Thing…&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://inoryy.com/js/fix-toc.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In this tutorial, I will give an overview of the TensorFlow 2.x features through the lens of deep reinforcement learning (DRL)
+by implementing an advantage actor-critic (A2C) agent, solving the classic CartPole-v0 environment.
+While the goal is to showcase TensorFlow 2.x, I will do my best to make DRL approachable as well,
+including a birds-eye overview of the field.&lt;/p&gt;
+
+&lt;p&gt;In fact, since the main focus of the 2.x release is making life easier for the developers,
+it’s a great time to get into DRL with TensorFlow.
+For example, the source code for this blog post is under 150 lines, including comments!&lt;br /&gt;
+Code is available on GitHub &lt;a href=&#34;https://github.com/inoryy/tensorflow2-deep-reinforcement-learning&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;
+and as a notebook on Google Colab &lt;a href=&#34;https://colab.research.google.com/drive/1XoHmGiwo2eUN-gzSVLRvE10fIf_ycO1j&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;To follow along, I recommend setting up a separate (virtual) environment.&lt;br /&gt;
+I prefer &lt;a href=&#34;https://www.anaconda.com/download&#34; target=&#34;_blank&#34;&gt;Anaconda&lt;/a&gt;, so I’ll illustrate with it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; conda create -n tf2 python=3.7
+&amp;gt; conda activate tf2
+&amp;gt; pip install tensorflow=2.1 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let us quickly verify everything works as expected:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; import tensorflow as tf
+&amp;gt;&amp;gt;&amp;gt; print(tf.__version__)
+2.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that we are now in eager mode by default!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; print(tf.executing_eagerly())
+True
+&amp;gt;&amp;gt;&amp;gt; print(&amp;quot;1 + 2 + 3 + 4 + 5 =&amp;quot;, tf.reduce_sum([1, 2, 3, 4, 5]))
+1 + 2 + 3 + 4 + 5 = tf.Tensor(15, shape=(), dtype=int32)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are not yet familiar with eager mode, then, in essence, it means that computation executes at runtime,
+rather than through a pre-compiled graph.
+You can find a good overview in the &lt;a href=&#34;https://www.tensorflow.org/tutorials/eager/eager_basics&#34; target=&#34;_blank&#34;&gt;TensorFlow documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;gpu-support&#34;&gt;GPU Support&lt;/h4&gt;
+
+&lt;p&gt;One great thing about specifically TensorFlow 2.1 is that there is no more hassle with separate CPU/GPU wheels!
+TensorFlow now supports both by default and targets appropriate devices at runtime.&lt;/p&gt;
+
+&lt;p&gt;The benefits of Anaconda are immediately apparent if you want to use a GPU.
+Setup for all the necessary CUDA dependencies is just one line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; conda install cudatoolkit=10.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can even install different CUDA toolkit versions in separate environments!&lt;/p&gt;
+
+&lt;h2 id=&#34;reinforcement-learning&#34;&gt;Reinforcement Learning&lt;/h2&gt;
+
+&lt;p&gt;Generally speaking, reinforcement learning is a high-level framework for solving sequential decision-making problems.
+An RL &lt;code&gt;agent&lt;/code&gt; navigates an &lt;code&gt;environment&lt;/code&gt; by taking &lt;code&gt;actions&lt;/code&gt; based on some &lt;code&gt;observations&lt;/code&gt;, receiving &lt;code&gt;rewards&lt;/code&gt; as a result.
+Most RL algorithms work by maximizing the expected total rewards an agent collects in a &lt;code&gt;trajectory&lt;/code&gt;, e.g., during one in-game round.&lt;/p&gt;
+
+&lt;p&gt;The output of an RL algorithm is a &lt;code&gt;policy&lt;/code&gt; &amp;ndash; a function from states to actions.&lt;br /&gt;
+A valid policy can be as simple as a hard-coded no-op action,
+but typically it represents a conditional probability distribution of actions given some state.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/fUcDHVt.png&#34; alt=&#34;&#34; /&gt;
+&lt;span class=&#34;source&#34;&gt;Figure: A general diagram of the RL training loop.&lt;/br&gt;
+Image via &lt;a href=&#34;http://web.stanford.edu/class/cs234/index.html&#34; target=&#34;_blank&#34;&gt;Stanford CS234 (2019)&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;RL algorithms are often grouped based on their optimization &lt;code&gt;loss function&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Temporal-Difference&lt;/code&gt; methods, such as &lt;code&gt;Q-Learning&lt;/code&gt;, reduce the error between predicted and actual state(-action) &lt;code&gt;values&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Policy Gradients&lt;/code&gt; directly optimize the policy by adjusting its parameters.
+Calculating gradients themselves is usually infeasible; instead, they are often estimated via &lt;code&gt;monte-carlo&lt;/code&gt; methods.&lt;/p&gt;
+
+&lt;p&gt;The most popular approach is a hybrid of the two: &lt;code&gt;actor-critic&lt;/code&gt; methods, where policy gradients optimize agent&amp;rsquo;s policy,
+and the temporal-difference method is used as a bootstrap for the expected value estimates.&lt;/p&gt;
+
+&lt;h4 id=&#34;deep-reinforcement-learning&#34;&gt;Deep Reinforcement Learning&lt;/h4&gt;
+
+&lt;p&gt;While much of the fundamental RL theory was developed on the tabular cases,
+modern RL is almost exclusively done with function approximators, such as &lt;code&gt;artificial neural networks&lt;/code&gt;.
+Specifically, an RL algorithm is considered &lt;code&gt;deep&lt;/code&gt; if the policy and value functions are approximated with neural networks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/gsXfI91.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;span class=&#34;source&#34;&gt;Figure: DRL implies ANN is used in the agent&amp;rsquo;s model.&lt;/br&gt;
+Image via &lt;a href=&#34;https://arxiv.org/abs/1810.04107&#34; target=&#34;_blank&#34;&gt;Mohammadi et al (2018)&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;asynchronous-advantage-actor-critic&#34;&gt;(Asynchronous) Advantage Actor-Critic&lt;/h4&gt;
+
+&lt;p&gt;Over the years, several improvements were added to address sample efficiency and stability of the learning process.&lt;/p&gt;
+
+&lt;p&gt;First, gradients are weighted with &lt;code&gt;returns&lt;/code&gt;: a discounted sum of future rewards,
+which resolves theoretical issues with infinite timesteps,
+and mitigates the &lt;code&gt;credit assignment problem&lt;/code&gt; &amp;ndash; allocate rewards to the correct actions.&lt;/p&gt;
+
+&lt;p&gt;Second, an &lt;code&gt;advantage function&lt;/code&gt; is used instead of raw returns.
+Advantage is formed as the difference between the returns and some &lt;code&gt;baseline&lt;/code&gt;, which is often the value estimate,
+and can be thought of as a measure of how good a given action is compared to some average.&lt;/p&gt;
+
+&lt;p&gt;Third, an additional &lt;code&gt;entropy maximization&lt;/code&gt; term is used in the objective function to ensure the agent
+sufficiently explores various policies. In essence, entropy measures how &lt;em&gt;random&lt;/em&gt; a given probability distribution is.
+For example, entropy is highest in the uniform distribution.&lt;/p&gt;
+
+&lt;p&gt;Finally, multiple workers are used in &lt;code&gt;parallel&lt;/code&gt; to speed up sample gathering while helping decorrelate them during training,
+diversifying the experiences an agent trains on in a given batch.&lt;/p&gt;
+
+&lt;p&gt;Incorporating all of these changes with deep neural networks, we arrive at the two of the most popular modern algorithms:
+(asynchronous) advantage actor critic, or &lt;code&gt;A3C/A2C&lt;/code&gt; for short. The difference between the two is more technical than theoretical.
+As the name suggests, it boils down to how the parallel workers estimate their gradients and propagate them to the model.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/CL0w8rl.png&#34; alt=&#34;&#34; /&gt;
+&lt;span class=&#34;source&#34;&gt;Image via &lt;a href=&#34;http://bit.ly/2uAJm2S&#34; target=&#34;_blank&#34;&gt;Juliani A. (2016)&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;With this, we wrap up our tour of the DRL methods and move on to the focus of the blog post is more on the TensorFlow 2.x features.
+Don’t worry if you’re still unsure about the subject; things should become clearer with code examples.&lt;br /&gt;
+If you want to learn more, one excellent resource is &lt;a href=&#34;https://spinningup.openai.com/en/latest&#34; target=&#34;_blank&#34;&gt;Spinning Up in Deep RL&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;advantage-actor-critic-with-tensorflow-2-1&#34;&gt;Advantage Actor-Critic With TensorFlow 2.1&lt;/h2&gt;
+
+&lt;p&gt;Now that we are more or less on the same page, let’s see what it takes to implement the basis of many modern DRL algorithms:
+an actor-critic agent, described in the previous section. Without parallel workers (for simplicity), though
+most of the code would be the same.&lt;/p&gt;
+
+&lt;p&gt;As a testbed, we are going to use the &lt;a href=&#34;https://gym.openai.com/envs/CartPole-v0/&#34; target=&#34;_blank&#34;&gt;CartPole-v0&lt;/a&gt; environment.
+Somewhat simplistic, it is still a great option to get started. In fact, I often rely on it as a sanity check when implementing RL algorithms.&lt;/p&gt;
+
+&lt;h4 id=&#34;policy-value-models-via-keras-api&#34;&gt;Policy &amp;amp; Value Models via Keras API&lt;/h4&gt;
+
+&lt;p&gt;First, we create the policy and value estimate NNs under a single model class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import numpy as np
+import tensorflow as tf
+import tensorflow.keras.layers as kl
+
+
+class ProbabilityDistribution(tf.keras.Model):
+  def call(self, logits, **kwargs):
+    # Sample a random categorical action from the given logits.
+    return tf.squeeze(tf.random.categorical(logits, 1), axis=-1)
+
+
+class Model(tf.keras.Model):
+  def __init__(self, num_actions):
+    super().__init__(&#39;mlp_policy&#39;)
+    # Note: no tf.get_variable(), just simple Keras API!
+    self.hidden1 = kl.Dense(128, activation=&#39;relu&#39;)
+    self.hidden2 = kl.Dense(128, activation=&#39;relu&#39;)
+    self.value = kl.Dense(1, name=&#39;value&#39;)
+    # Logits are unnormalized log probabilities.
+    self.logits = kl.Dense(num_actions, name=&#39;policy_logits&#39;)
+    self.dist = ProbabilityDistribution()
+
+  def call(self, inputs, **kwargs):
+    # Inputs is a numpy array, convert to a tensor.
+    x = tf.convert_to_tensor(inputs)
+    # Separate hidden layers from the same input tensor.
+    hidden_logs = self.hidden1(x)
+    hidden_vals = self.hidden2(x)
+    return self.logits(hidden_logs), self.value(hidden_vals)
+
+  def action_value(self, obs):
+    # Executes `call()` under the hood.
+    logits, value = self.predict_on_batch(obs)
+    action = self.dist.predict_on_batch(logits)
+    # Another way to sample actions:
+    #   action = tf.random.categorical(logits, 1)
+    # Will become clearer later why we don&#39;t use it.
+    return np.squeeze(action, axis=-1), np.squeeze(value, axis=-1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And verify the model works as expected:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import gym
+
+env = gym.make(&#39;CartPole-v0&#39;)
+model = Model(num_actions=env.action_space.n)
+
+obs = env.reset()
+# No feed_dict or tf.Session() needed at all!
+action, value = model.action_value(obs[None, :])
+print(action, value) # [1] [-0.00145713]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Things to note here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Model layers and execution path are defined separately&lt;/li&gt;
+&lt;li&gt;There is no “input” layer; model accepts raw numpy arrays&lt;/li&gt;
+&lt;li&gt;Two computation paths can exist in one model via functional API&lt;/li&gt;
+&lt;li&gt;A model can contain helper methods such as action sampling&lt;/li&gt;
+&lt;li&gt;In eager mode, everything works from raw numpy arrays&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;agent-interface&#34;&gt;Agent Interface&lt;/h4&gt;
+
+&lt;p&gt;Now we can move on to the fun stuff &amp;ndash; the agent class.
+First, we add a &lt;code&gt;test&lt;/code&gt; method that runs through a full episode,
+keeping track of the rewards.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class A2CAgent:
+  def __init__(self, model):
+    self.model = model
+
+  def test(self, env, render=True):
+    obs, done, ep_reward = env.reset(), False, 0
+    while not done:
+      action, _ = self.model.action_value(obs[None, :])
+      obs, reward, done, _ = env.step(action)
+      ep_reward += reward
+      if render:
+        env.render()
+    return ep_reward
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can check how much the agent scores with randomly initialized weights:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;agent = A2CAgent(model)
+rewards_sum = agent.test(env)
+print(&amp;quot;%d out of 200&amp;quot; % rewards_sum) # 18 out of 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not even close to optimal, time to get to the training part!&lt;/p&gt;
+
+&lt;h4 id=&#34;loss-objective-function&#34;&gt;Loss / Objective Function&lt;/h4&gt;
+
+&lt;p&gt;As I have described in the RL section, an agent improves its policy through gradient descent based on some loss (objective) function.
+In the A2C algorithm, we train on three objectives: improve policy with advantage weighted gradients, maximize the entropy, and minimize value estimate errors.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow.keras.losses as kls
+import tensorflow.keras.optimizers as ko
+
+
+class A2CAgent:
+  def __init__(self, model, lr=7e-3, value_c=0.5, entropy_c=1e-4):
+    # Coefficients are used for the loss terms.
+    self.value_c = value_c
+    self.entropy_c = entropy_c
+
+    self.model = model
+    self.model.compile(
+      optimizer=ko.RMSprop(lr=lr),
+      # Define separate losses for policy logits and value estimate.
+      loss=[self._logits_loss, self._value_loss])
+
+  def test(self, env, render=False):
+    # Unchanged from the previous section.
+    ...
+
+  def _value_loss(self, returns, value):
+    # Value loss is typically MSE between value estimates and returns.
+    return self.value_c * kls.mean_squared_error(returns, value)
+
+  def _logits_loss(self, actions_and_advantages, logits):
+    # A trick to input actions and advantages through the same API.
+    actions, advantages = tf.split(actions_and_advantages, 2, axis=-1)
+
+    # Sparse categorical CE loss obj that supports sample_weight arg on `call()`.
+    # `from_logits` argument ensures transformation into normalized probabilities.
+    weighted_sparse_ce = kls.SparseCategoricalCrossentropy(from_logits=True)
+
+    # Policy loss is defined by policy gradients, weighted by advantages.
+    # Note: we only calculate the loss on the actions we&#39;ve actually taken.
+    actions = tf.cast(actions, tf.int32)
+    policy_loss = weighted_sparse_ce(actions, logits, sample_weight=advantages)
+
+    # Entropy loss can be calculated as cross-entropy over itself.
+    probs = tf.nn.softmax(logits)
+    entropy_loss = kls.categorical_crossentropy(probs, probs)
+
+    # We want to minimize policy and maximize entropy losses.
+    # Here signs are flipped because the optimizer minimizes.
+    return policy_loss - self.entropy_c * entropy_loss
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And we are done with the objective functions!
+Note how compact the code is: there are almost more comment lines than code itself.&lt;/p&gt;
+
+&lt;h4 id=&#34;the-training-loop&#34;&gt;The Training Loop&lt;/h4&gt;
+
+&lt;p&gt;Finally, there is the train loop itself. It is relatively long, but fairly straightforward:
+collect samples, calculate returns and advantages, and train the model on them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class A2CAgent:
+  def __init__(self, model, lr=7e-3, gamma=0.99, value_c=0.5, entropy_c=1e-4):
+    # `gamma` is the discount factor
+    self.gamma = gamma
+    # Unchanged from the previous section.
+    ...
+  
+  def train(self, env, batch_sz=64, updates=250):
+    # Storage helpers for a single batch of data.
+    actions = np.empty((batch_sz,), dtype=np.int32)
+    rewards, dones, values = np.empty((3, batch_sz))
+    observations = np.empty((batch_sz,) + env.observation_space.shape)
+
+    # Training loop: collect samples, send to optimizer, repeat updates times.
+    ep_rewards = [0.0]
+    next_obs = env.reset()
+    for update in range(updates):
+      for step in range(batch_sz):
+        observations[step] = next_obs.copy()
+        actions[step], values[step] = self.model.action_value(next_obs[None, :])
+        next_obs, rewards[step], dones[step], _ = env.step(actions[step])
+
+        ep_rewards[-1] += rewards[step]
+        if dones[step]:
+          ep_rewards.append(0.0)
+          next_obs = env.reset()
+          logging.info(&amp;quot;Episode: %03d, Reward: %03d&amp;quot; % (
+            len(ep_rewards) - 1, ep_rewards[-2]))
+
+      _, next_value = self.model.action_value(next_obs[None, :])
+
+      returns, advs = self._returns_advantages(rewards, dones, values, next_value)
+      # A trick to input actions and advantages through same API.
+      acts_and_advs = np.concatenate([actions[:, None], advs[:, None]], axis=-1)
+
+      # Performs a full training step on the collected batch.
+      # Note: no need to mess around with gradients, Keras API handles it.
+      losses = self.model.train_on_batch(observations, [acts_and_advs, returns])
+
+      logging.debug(&amp;quot;[%d/%d] Losses: %s&amp;quot; % (update + 1, updates, losses))
+
+    return ep_rewards
+
+  def _returns_advantages(self, rewards, dones, values, next_value):
+    # `next_value` is the bootstrap value estimate of the future state (critic).
+    returns = np.append(np.zeros_like(rewards), next_value, axis=-1)
+
+    # Returns are calculated as discounted sum of future rewards.
+    for t in reversed(range(rewards.shape[0])):
+      returns[t] = rewards[t] + self.gamma * returns[t + 1] * (1 - dones[t])
+    returns = returns[:-1]
+
+    # Advantages are equal to returns - baseline (value estimates in our case).
+    advantages = returns - values
+
+    return returns, advantages
+
+  def test(self, env, render=False):
+    # Unchanged from the previous section.
+    ...
+
+  def _value_loss(self, returns, value):
+    # Unchanged from the previous section.
+    ...
+
+  def _logits_loss(self, actions_and_advantages, logits):
+    # Unchanged from the previous section.
+    ...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;results&#34;&gt;Results&lt;/h4&gt;
+
+&lt;p&gt;We are now all set to train our single-worker A2C agent on CartPole-v0!
+The training process should take a couple of minutes.
+After the training is complete, you should see an agent achieve the target 200 out of 200 score.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;rewards_history = agent.train(env)
+print(&amp;quot;Finished training, testing...&amp;quot;)
+print(&amp;quot;%d out of 200&amp;quot; % agent.test(env)) # 200 out of 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://thumbs.gfycat.com/SoupyConsciousGrayling-size_restricted.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the source code, I include some additional helpers that print out running episode rewards and losses,
+along with basic plotter for the rewards history.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/cFwQgPB.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;static-computational-graph&#34;&gt;Static Computational Graph&lt;/h2&gt;
+
+&lt;p&gt;With all of this eager mode excitement, you might wonder if using a static graph is even possible anymore.
+Of course, it is! And it takes just one line!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;with tf.Graph().as_default():
+  print(tf.executing_eagerly()) # False
+
+  model = Model(num_actions=env.action_space.n)
+  agent = A2CAgent(model)
+
+  rewards_history = agent.train(env)
+  print(&amp;quot;Finished training, testing...&amp;quot;)
+  print(&amp;quot;%d out of 200&amp;quot; % agent.test(env)) # 200 out of 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is one caveat though: during static graph execution, we can not just have Tensors laying around,
+which is why we needed that trick with the separate &lt;code&gt;ProbabilityDistribution&lt;/code&gt; model definition.
+In fact, while I was looking for a way to execute in static mode,
+I discovered one interesting low-level detail about models built through the Keras API&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;one-more-thing&#34;&gt;One More Thing…&lt;/h2&gt;
+
+&lt;p&gt;Remember when I said TensorFlow runs in eager mode by default, even proving it with a code snippet? Well, I lied! Kind of.&lt;/p&gt;
+
+&lt;p&gt;If you use Keras API to build and manage your models, then it attempts to compile them as static graphs under the hood.
+So what you end up with is the performance of static graphs with the flexibility of eager execution.&lt;/p&gt;
+
+&lt;p&gt;You can check the status of your model via the &lt;code&gt;model.run_eagerly&lt;/code&gt; flag.
+You can also force eager mode by manually setting it, though most of the times you probably don’t need to &amp;ndash;
+if Keras detects that there is no way around eager mode, it backs off on its own.&lt;/p&gt;
+
+&lt;p&gt;To illustrate that it is running as a static graph here is a simple benchmark:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Generate 100k observations to run benchmarks on.
+env = gym.make(&#39;CartPole-v0&#39;)
+obs = np.repeat(env.reset()[None, :], 100000, axis=0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Eager Benchmark&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%%time
+
+model = Model(env.action_space.n)
+model.run_eagerly = True
+
+print(&amp;quot;Eager Execution:  &amp;quot;, tf.executing_eagerly())
+print(&amp;quot;Eager Keras Model:&amp;quot;, model.run_eagerly)
+
+_ = model(obs)
+
+######## Results #######
+
+Eager Execution:   True
+Eager Keras Model: True
+CPU times: user 639 ms, sys: 736 ms, total: 1.38 s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Static Benchmark&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%%time
+
+with tf.Graph().as_default():
+    model = Model(env.action_space.n)
+
+    print(&amp;quot;Eager Execution:  &amp;quot;, tf.executing_eagerly())
+    print(&amp;quot;Eager Keras Model:&amp;quot;, model.run_eagerly)
+
+    _ = model.predict_on_batch(obs)
+
+######## Results #######
+
+Eager Execution:   False
+Eager Keras Model: False
+CPU times: user 793 ms, sys: 79.7 ms, total: 873 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Default Benchmark&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%%time
+
+model = Model(env.action_space.n)
+
+print(&amp;quot;Eager Execution:  &amp;quot;, tf.executing_eagerly())
+print(&amp;quot;Eager Keras Model:&amp;quot;, model.run_eagerly)
+
+_ = model.predict_on_batch(obs)
+
+######## Results #######
+
+Eager Execution:   True
+Eager Keras Model: False
+CPU times: user 994 ms, sys: 23.1 ms, total: 1.02 s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, eager mode is behind static, and by default, our model was indeed executed statically,
+almost matching the explicitly static execution.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Hopefully, this has been an illustrative tour of both DRL and the shiny new things in TensorFlow 2.x.
+Note that many of the design choice discussions are &lt;a href=&#34;https://groups.google.com/a/tensorflow.org/forum/#!forum/developers&#34; target=&#34;_blank&#34;&gt;open to the public&lt;/a&gt;,
+and everything is subject to change. If there is something about TensorFlow, you especially dislike (or like :) ), let the developers know!&lt;/p&gt;
+
+&lt;p&gt;A lingering question people might have is if TensorFlow is better than PyTorch? Maybe. Maybe not.
+Both are excellent libraries, so it is hard to say one way or the other. If you are familiar with PyTorch,
+you probably noticed that TensorFlow 2.x has caught up and arguably avoided some of the PyTorch API pitfalls.&lt;/p&gt;
+
+&lt;p&gt;At the same time, I think it would be fair to say that PyTorch was affected by the design choices of TensorFlow.
+What is clear is that this &amp;ldquo;competition&amp;rdquo; has resulted in a net-positive outcome for both camps!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reaver: Modular Deep Reinforcement Learning</title>
+      <link>http://inoryy.com/project/reaver-drl/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/project/reaver-drl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Starter Agent for Coders Strike Back AI Challenge</title>
+      <link>http://inoryy.com/project/csb-starter/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/project/csb-starter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Why I Majored in Statistics for a Career in Artificial Intelligence</title>
+      <link>http://inoryy.com/post/why-study-statistics-for-artificial-intelligence/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/why-study-statistics-for-artificial-intelligence/</guid>
+      <description>&lt;p&gt;Undergraduate major is often the first significant career decision a person makes in his life. As artificial intelligence (AI) becomes more and more ingrained in our society, many people begin to consider a career in AI as a viable choice in their life. However, it is still very rare to have an undergraduate degree fully dedicated to AI, so people opt for what they perceive to be the next best thing - computer science. But I believe there is a better alternative: statistics, and in this blog post I will try to explain why, based on my own example.&lt;/p&gt;
+
+&lt;p&gt;In the recent years AI and its many subfields like machine learning (ML) have exploded in popularity and are on track to pretty much take over every industry out there. And people have noticed: the introductory course Machine Learning (CS229) at Stanford had over a thousand students enrolled in the fall of 2017!&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Stanford&amp;#39;s first day of class--record-breaking 1040 people already enrolled for on-campus Machine Learning (CS229). Wow! &lt;a href=&#34;https://twitter.com/danboneh?ref_src=twsrc%5Etfw&#34;&gt;@danboneh&lt;/a&gt;&lt;/p&gt;&amp;mdash; Andrew Ng (@AndrewYNg) &lt;a href=&#34;https://twitter.com/AndrewYNg/status/912382154155352064?ref_src=twsrc%5Etfw&#34;&gt;September 25, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;Well, I want to let you in on a little secret: majority of AI/ML, including the hip new trend you’ve probably heard about called deep learning, is just applied statistics in disguise: many ML techniques and algorithms are either fully borrowed from or heavily rely on the theory from statistics.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://xkcd.com/1838/&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://imgs.xkcd.com/comics/machine_learning.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, statistics is lacking in their PR department, which causes many people to misunderstand the field. When I said I am majoring in statistics, many of my peers reaction was confusion at best, with some even assuming I was joking. In fact I was often looked down upon by both maths and CS majors: mathematicians considered stats to be not “pure” enough, whereas CS people thought it’s not engineering-oriented enough. What’s funny is that I actually agree with both of those camps, but I believe those to be pros rather than cons. So let’s review some of the core subjects I’ve taken during my undergraduate studies and how they have helped me with AI/ML.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mathematical Analysis.&lt;/strong&gt; You’ve probably heard of or even taken the “practical” alternative to it - Calculus, which is an okay subject, but in my opinion by not focusing on the theory behind the various theorems and lemmas a student never actually builds an intuitive understanding. And boy does it help in AI/ML. The topics at the heart of MA - continuity and differentiability, are also what is behind most of AI/ML algorithms.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Probability Theory and Statistics.&lt;/strong&gt; Again, some version of this subject is likely taught in CS degrees as well, but theory is typically avoided. I’ve had no trouble diving head first into reinforcement learning thanks to deep and intuitive understanding of random variables and their estimates, expectations, distributions, and so on.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Numerical Methods.&lt;/strong&gt; Speaking of what is behind most of AI/ML, this subject tackles the questions of function optimization and approximation. And if function approximation sounds alien to you, then perhaps you’ve heard of its special case - artificial neural networks.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Matrix Calculus.&lt;/strong&gt; And while we’re on the subject of artificial neural networks, you’ve probably heard that they are represented as a chain of differentiable matrix operations. Well, here is a whole subject dedicated to understanding how to transfer your multivariate differentiation theory into the world of linear algebra.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Monte Carlo Methods.&lt;/strong&gt; Have you ever wondered how probability theory is applied in practice? How can your computer generate random variables from any distribution? Well, this subject covers this and much more. And if you are into reinforcement learning then this course is probably the most important one to take as it covers a large chunk of the theory behind it. For example, the REINFORCE family of algorithms are built on the monte carlo methods.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Stochastic Processes.&lt;/strong&gt; Speaking of theory behind RL, here&amp;rsquo;s a whole subject dedicated to dealing with probability distributions over time. Markov Chains, Renewals, Queues, Brownian Motions, Gaussian Processes, &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Analysis.&lt;/strong&gt; Did I mention that majority of machine learning is actually applied statistics? This course intimately covers the theory behind what people would refer to as classical ML - from simple linear regression to generalized models.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Experimental Design.&lt;/strong&gt; As we are starting to reach the limitations of our hardware the various ML/RL experiments become increasingly expensive in terms of wall-clock time. More and more people are now looking for ways to extract similar quality of information with less effort. Well, statisticians have been working on this problem for decades and you can learn all about it in this course.&lt;/p&gt;
+
+&lt;p&gt;But what about programming, you might ask? Well, with a balanced curriculum you actually get quite a fair share of computer science. In fact, with a couple of good elective choices you can cover most of the fundamental knowledge necessary to work as a software engineer if you ever wanted to switch. For example here are the CS courses I have had in my undergrad:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Intro to Programming (Python)&lt;/li&gt;
+&lt;li&gt;Object Oriented Programming (Java)&lt;/li&gt;
+&lt;li&gt;Algorithms and Data Structures (Java)&lt;/li&gt;
+&lt;li&gt;Database Systems (SQL)&lt;/li&gt;
+&lt;li&gt;Operating Systems (Python / Java)&lt;/li&gt;
+&lt;li&gt;Programming Languages (Prolog, Haskell, Scala, OCaml, C)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So where’s the catch? Well, the problem with having a subject that is so widely misunderstood and unpopular is that the recruiters looking at your resume might assume you’re one of those hippies that prefers pen &amp;amp; paper to a keyboard and pass you over for a &amp;ldquo;safe&amp;rdquo; computer science guy. Unfortunately to get around this I think it’s inevitable that you still have to get the desired stamp, either via double major or with a computer science focused masters degree.&lt;/p&gt;
+
+&lt;p&gt;In conclusion, I believe statistics to be the perfect major for a career in AI. As I am wrapping up my first semester of computer science masters I feel that I am often quite ahead of my peers specifically because of my undergraduate background and hopefully I have persuaded some of you to give it a shot!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

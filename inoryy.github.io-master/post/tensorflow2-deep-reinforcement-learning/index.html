@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-18538959-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-18538959-6');
+    </script>
+  
+  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Roman Ring">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="In this tutorial, I will give an overview of the TensorFlow 2.x features through the lens of deep reinforcement learning (DRL)
+by implementing an advantage actor-critic (A2C) agent, solving the classic CartPole-v0 environment.
+While the goal is to showcase TensorFlow 2.x, I will do my best to make DRL approachable as well, including a birds-eye overview of the field.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  <link rel="alternate" href="http://inoryy.com/index.xml" type="application/rss+xml" title="Roman Ring">
+  <link rel="feed" href="http://inoryy.com/index.xml" type="application/rss+xml" title="Roman Ring">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@inoryy">
+  <meta property="twitter:creator" content="@inoryy">
+  
+  <meta property="og:site_name" content="Roman Ring">
+  <meta property="og:url" content="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/">
+  <meta property="og:title" content="Deep Reinforcement Learning With TensorFlow 2.1 | Roman Ring">
+  <meta property="og:description" content="In this tutorial, I will give an overview of the TensorFlow 2.x features through the lens of deep reinforcement learning (DRL)
+by implementing an advantage actor-critic (A2C) agent, solving the classic CartPole-v0 environment.
+While the goal is to showcase TensorFlow 2.x, I will do my best to make DRL approachable as well, including a birds-eye overview of the field.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-01-20T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2020-01-13T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Deep Reinforcement Learning With TensorFlow 2.1 | Roman Ring</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Roman Ring</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/ring_roman_cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Deep Reinforcement Learning With TensorFlow 2.1</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Roman Ring">
+  </span>
+  
+
+  <span class="article-date">
+    
+        Last updated on
+    
+    <meta content="2019-01-20 00:00:00 &#43;0000 GMT" itemprop="datePublished">
+    <time datetime="2020-01-13 00:00:00 &#43;0000 GMT" itemprop="dateModified">
+      Jan 13, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Roman Ring">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    13 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Deep%20Reinforcement%20Learning%20With%20TensorFlow%202.1&amp;url=http%3a%2f%2finoryy.com%2fpost%2ftensorflow2-deep-reinforcement-learning%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2finoryy.com%2fpost%2ftensorflow2-deep-reinforcement-learning%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2finoryy.com%2fpost%2ftensorflow2-deep-reinforcement-learning%2f&amp;title=Deep%20Reinforcement%20Learning%20With%20TensorFlow%202.1"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2finoryy.com%2fpost%2ftensorflow2-deep-reinforcement-learning%2f&amp;title=Deep%20Reinforcement%20Learning%20With%20TensorFlow%202.1"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Deep%20Reinforcement%20Learning%20With%20TensorFlow%202.1&amp;body=http%3a%2f%2finoryy.com%2fpost%2ftensorflow2-deep-reinforcement-learning%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p><h2>Table of Contents</h2>
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#setup">Setup</a>
+<ul>
+<li>
+<ul>
+<li><a href="#gpu-support">GPU Support</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a>
+<ul>
+<li>
+<ul>
+<li><a href="#deep-reinforcement-learning">Deep Reinforcement Learning</a></li>
+<li><a href="#asynchronous-advantage-actor-critic">(Asynchronous) Advantage Actor-Critic</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#advantage-actor-critic-with-tensorflow-2-1">Advantage Actor-Critic With TensorFlow 2.1</a>
+<ul>
+<li>
+<ul>
+<li><a href="#policy-value-models-via-keras-api">Policy &amp; Value Models via Keras API</a></li>
+<li><a href="#agent-interface">Agent Interface</a></li>
+<li><a href="#loss-objective-function">Loss / Objective Function</a></li>
+<li><a href="#the-training-loop">The Training Loop</a></li>
+<li><a href="#results">Results</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#static-computational-graph">Static Computational Graph</a></li>
+<li><a href="#one-more-thing">One More Thing…</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<script type="text/javascript" src="/js/fix-toc.js"></script></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this tutorial, I will give an overview of the TensorFlow 2.x features through the lens of deep reinforcement learning (DRL)
+by implementing an advantage actor-critic (A2C) agent, solving the classic CartPole-v0 environment.
+While the goal is to showcase TensorFlow 2.x, I will do my best to make DRL approachable as well,
+including a birds-eye overview of the field.</p>
+
+<p>In fact, since the main focus of the 2.x release is making life easier for the developers,
+it’s a great time to get into DRL with TensorFlow.
+For example, the source code for this blog post is under 150 lines, including comments!<br />
+Code is available on GitHub <a href="https://github.com/inoryy/tensorflow2-deep-reinforcement-learning" target="_blank">here</a>
+and as a notebook on Google Colab <a href="https://colab.research.google.com/drive/1XoHmGiwo2eUN-gzSVLRvE10fIf_ycO1j" target="_blank">here</a>.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>To follow along, I recommend setting up a separate (virtual) environment.<br />
+I prefer <a href="https://www.anaconda.com/download" target="_blank">Anaconda</a>, so I’ll illustrate with it:</p>
+
+<pre><code>&gt; conda create -n tf2 python=3.7
+&gt; conda activate tf2
+&gt; pip install tensorflow=2.1 
+</code></pre>
+
+<p>Let us quickly verify everything works as expected:</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; print(tf.__version__)
+2.1.0
+</code></pre>
+
+<p>Note that we are now in eager mode by default!</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; print(tf.executing_eagerly())
+True
+&gt;&gt;&gt; print(&quot;1 + 2 + 3 + 4 + 5 =&quot;, tf.reduce_sum([1, 2, 3, 4, 5]))
+1 + 2 + 3 + 4 + 5 = tf.Tensor(15, shape=(), dtype=int32)
+</code></pre>
+
+<p>If you are not yet familiar with eager mode, then, in essence, it means that computation executes at runtime,
+rather than through a pre-compiled graph.
+You can find a good overview in the <a href="https://www.tensorflow.org/tutorials/eager/eager_basics" target="_blank">TensorFlow documentation</a>.</p>
+
+<h4 id="gpu-support">GPU Support</h4>
+
+<p>One great thing about specifically TensorFlow 2.1 is that there is no more hassle with separate CPU/GPU wheels!
+TensorFlow now supports both by default and targets appropriate devices at runtime.</p>
+
+<p>The benefits of Anaconda are immediately apparent if you want to use a GPU.
+Setup for all the necessary CUDA dependencies is just one line:</p>
+
+<pre><code>&gt; conda install cudatoolkit=10.1
+</code></pre>
+
+<p>You can even install different CUDA toolkit versions in separate environments!</p>
+
+<h2 id="reinforcement-learning">Reinforcement Learning</h2>
+
+<p>Generally speaking, reinforcement learning is a high-level framework for solving sequential decision-making problems.
+An RL <code>agent</code> navigates an <code>environment</code> by taking <code>actions</code> based on some <code>observations</code>, receiving <code>rewards</code> as a result.
+Most RL algorithms work by maximizing the expected total rewards an agent collects in a <code>trajectory</code>, e.g., during one in-game round.</p>
+
+<p>The output of an RL algorithm is a <code>policy</code> &ndash; a function from states to actions.<br />
+A valid policy can be as simple as a hard-coded no-op action,
+but typically it represents a conditional probability distribution of actions given some state.</p>
+
+<p><img src="https://i.imgur.com/fUcDHVt.png" alt="" />
+<span class="source">Figure: A general diagram of the RL training loop.</br>
+Image via <a href="http://web.stanford.edu/class/cs234/index.html" target="_blank">Stanford CS234 (2019)</a>.</span></p>
+
+<p>RL algorithms are often grouped based on their optimization <code>loss function</code>.</p>
+
+<p><code>Temporal-Difference</code> methods, such as <code>Q-Learning</code>, reduce the error between predicted and actual state(-action) <code>values</code>.</p>
+
+<p><code>Policy Gradients</code> directly optimize the policy by adjusting its parameters.
+Calculating gradients themselves is usually infeasible; instead, they are often estimated via <code>monte-carlo</code> methods.</p>
+
+<p>The most popular approach is a hybrid of the two: <code>actor-critic</code> methods, where policy gradients optimize agent&rsquo;s policy,
+and the temporal-difference method is used as a bootstrap for the expected value estimates.</p>
+
+<h4 id="deep-reinforcement-learning">Deep Reinforcement Learning</h4>
+
+<p>While much of the fundamental RL theory was developed on the tabular cases,
+modern RL is almost exclusively done with function approximators, such as <code>artificial neural networks</code>.
+Specifically, an RL algorithm is considered <code>deep</code> if the policy and value functions are approximated with neural networks.</p>
+
+<p><img src="https://i.imgur.com/gsXfI91.jpg" alt="" />
+<span class="source">Figure: DRL implies ANN is used in the agent&rsquo;s model.</br>
+Image via <a href="https://arxiv.org/abs/1810.04107" target="_blank">Mohammadi et al (2018)</a>.</span></p>
+
+<h4 id="asynchronous-advantage-actor-critic">(Asynchronous) Advantage Actor-Critic</h4>
+
+<p>Over the years, several improvements were added to address sample efficiency and stability of the learning process.</p>
+
+<p>First, gradients are weighted with <code>returns</code>: a discounted sum of future rewards,
+which resolves theoretical issues with infinite timesteps,
+and mitigates the <code>credit assignment problem</code> &ndash; allocate rewards to the correct actions.</p>
+
+<p>Second, an <code>advantage function</code> is used instead of raw returns.
+Advantage is formed as the difference between the returns and some <code>baseline</code>, which is often the value estimate,
+and can be thought of as a measure of how good a given action is compared to some average.</p>
+
+<p>Third, an additional <code>entropy maximization</code> term is used in the objective function to ensure the agent
+sufficiently explores various policies. In essence, entropy measures how <em>random</em> a given probability distribution is.
+For example, entropy is highest in the uniform distribution.</p>
+
+<p>Finally, multiple workers are used in <code>parallel</code> to speed up sample gathering while helping decorrelate them during training,
+diversifying the experiences an agent trains on in a given batch.</p>
+
+<p>Incorporating all of these changes with deep neural networks, we arrive at the two of the most popular modern algorithms:
+(asynchronous) advantage actor critic, or <code>A3C/A2C</code> for short. The difference between the two is more technical than theoretical.
+As the name suggests, it boils down to how the parallel workers estimate their gradients and propagate them to the model.</p>
+
+<p><img src="https://i.imgur.com/CL0w8rl.png" alt="" />
+<span class="source">Image via <a href="http://bit.ly/2uAJm2S" target="_blank">Juliani A. (2016)</a>.</span></p>
+
+<p>With this, we wrap up our tour of the DRL methods and move on to the focus of the blog post is more on the TensorFlow 2.x features.
+Don’t worry if you’re still unsure about the subject; things should become clearer with code examples.<br />
+If you want to learn more, one excellent resource is <a href="https://spinningup.openai.com/en/latest" target="_blank">Spinning Up in Deep RL</a>.</p>
+
+<h2 id="advantage-actor-critic-with-tensorflow-2-1">Advantage Actor-Critic With TensorFlow 2.1</h2>
+
+<p>Now that we are more or less on the same page, let’s see what it takes to implement the basis of many modern DRL algorithms:
+an actor-critic agent, described in the previous section. Without parallel workers (for simplicity), though
+most of the code would be the same.</p>
+
+<p>As a testbed, we are going to use the <a href="https://gym.openai.com/envs/CartPole-v0/" target="_blank">CartPole-v0</a> environment.
+Somewhat simplistic, it is still a great option to get started. In fact, I often rely on it as a sanity check when implementing RL algorithms.</p>
+
+<h4 id="policy-value-models-via-keras-api">Policy &amp; Value Models via Keras API</h4>
+
+<p>First, we create the policy and value estimate NNs under a single model class:</p>
+
+<pre><code class="language-python">import numpy as np
+import tensorflow as tf
+import tensorflow.keras.layers as kl
+
+
+class ProbabilityDistribution(tf.keras.Model):
+  def call(self, logits, **kwargs):
+    # Sample a random categorical action from the given logits.
+    return tf.squeeze(tf.random.categorical(logits, 1), axis=-1)
+
+
+class Model(tf.keras.Model):
+  def __init__(self, num_actions):
+    super().__init__('mlp_policy')
+    # Note: no tf.get_variable(), just simple Keras API!
+    self.hidden1 = kl.Dense(128, activation='relu')
+    self.hidden2 = kl.Dense(128, activation='relu')
+    self.value = kl.Dense(1, name='value')
+    # Logits are unnormalized log probabilities.
+    self.logits = kl.Dense(num_actions, name='policy_logits')
+    self.dist = ProbabilityDistribution()
+
+  def call(self, inputs, **kwargs):
+    # Inputs is a numpy array, convert to a tensor.
+    x = tf.convert_to_tensor(inputs)
+    # Separate hidden layers from the same input tensor.
+    hidden_logs = self.hidden1(x)
+    hidden_vals = self.hidden2(x)
+    return self.logits(hidden_logs), self.value(hidden_vals)
+
+  def action_value(self, obs):
+    # Executes `call()` under the hood.
+    logits, value = self.predict_on_batch(obs)
+    action = self.dist.predict_on_batch(logits)
+    # Another way to sample actions:
+    #   action = tf.random.categorical(logits, 1)
+    # Will become clearer later why we don't use it.
+    return np.squeeze(action, axis=-1), np.squeeze(value, axis=-1)
+</code></pre>
+
+<p>And verify the model works as expected:</p>
+
+<pre><code class="language-python">import gym
+
+env = gym.make('CartPole-v0')
+model = Model(num_actions=env.action_space.n)
+
+obs = env.reset()
+# No feed_dict or tf.Session() needed at all!
+action, value = model.action_value(obs[None, :])
+print(action, value) # [1] [-0.00145713]
+</code></pre>
+
+<p>Things to note here:</p>
+
+<ul>
+<li>Model layers and execution path are defined separately</li>
+<li>There is no “input” layer; model accepts raw numpy arrays</li>
+<li>Two computation paths can exist in one model via functional API</li>
+<li>A model can contain helper methods such as action sampling</li>
+<li>In eager mode, everything works from raw numpy arrays</li>
+</ul>
+
+<h4 id="agent-interface">Agent Interface</h4>
+
+<p>Now we can move on to the fun stuff &ndash; the agent class.
+First, we add a <code>test</code> method that runs through a full episode,
+keeping track of the rewards.</p>
+
+<pre><code class="language-python">class A2CAgent:
+  def __init__(self, model):
+    self.model = model
+
+  def test(self, env, render=True):
+    obs, done, ep_reward = env.reset(), False, 0
+    while not done:
+      action, _ = self.model.action_value(obs[None, :])
+      obs, reward, done, _ = env.step(action)
+      ep_reward += reward
+      if render:
+        env.render()
+    return ep_reward
+</code></pre>
+
+<p>Now we can check how much the agent scores with randomly initialized weights:</p>
+
+<pre><code class="language-python">agent = A2CAgent(model)
+rewards_sum = agent.test(env)
+print(&quot;%d out of 200&quot; % rewards_sum) # 18 out of 200
+</code></pre>
+
+<p>Not even close to optimal, time to get to the training part!</p>
+
+<h4 id="loss-objective-function">Loss / Objective Function</h4>
+
+<p>As I have described in the RL section, an agent improves its policy through gradient descent based on some loss (objective) function.
+In the A2C algorithm, we train on three objectives: improve policy with advantage weighted gradients, maximize the entropy, and minimize value estimate errors.</p>
+
+<pre><code class="language-python">import tensorflow.keras.losses as kls
+import tensorflow.keras.optimizers as ko
+
+
+class A2CAgent:
+  def __init__(self, model, lr=7e-3, value_c=0.5, entropy_c=1e-4):
+    # Coefficients are used for the loss terms.
+    self.value_c = value_c
+    self.entropy_c = entropy_c
+
+    self.model = model
+    self.model.compile(
+      optimizer=ko.RMSprop(lr=lr),
+      # Define separate losses for policy logits and value estimate.
+      loss=[self._logits_loss, self._value_loss])
+
+  def test(self, env, render=False):
+    # Unchanged from the previous section.
+    ...
+
+  def _value_loss(self, returns, value):
+    # Value loss is typically MSE between value estimates and returns.
+    return self.value_c * kls.mean_squared_error(returns, value)
+
+  def _logits_loss(self, actions_and_advantages, logits):
+    # A trick to input actions and advantages through the same API.
+    actions, advantages = tf.split(actions_and_advantages, 2, axis=-1)
+
+    # Sparse categorical CE loss obj that supports sample_weight arg on `call()`.
+    # `from_logits` argument ensures transformation into normalized probabilities.
+    weighted_sparse_ce = kls.SparseCategoricalCrossentropy(from_logits=True)
+
+    # Policy loss is defined by policy gradients, weighted by advantages.
+    # Note: we only calculate the loss on the actions we've actually taken.
+    actions = tf.cast(actions, tf.int32)
+    policy_loss = weighted_sparse_ce(actions, logits, sample_weight=advantages)
+
+    # Entropy loss can be calculated as cross-entropy over itself.
+    probs = tf.nn.softmax(logits)
+    entropy_loss = kls.categorical_crossentropy(probs, probs)
+
+    # We want to minimize policy and maximize entropy losses.
+    # Here signs are flipped because the optimizer minimizes.
+    return policy_loss - self.entropy_c * entropy_loss
+</code></pre>
+
+<p>And we are done with the objective functions!
+Note how compact the code is: there are almost more comment lines than code itself.</p>
+
+<h4 id="the-training-loop">The Training Loop</h4>
+
+<p>Finally, there is the train loop itself. It is relatively long, but fairly straightforward:
+collect samples, calculate returns and advantages, and train the model on them.</p>
+
+<pre><code class="language-python">class A2CAgent:
+  def __init__(self, model, lr=7e-3, gamma=0.99, value_c=0.5, entropy_c=1e-4):
+    # `gamma` is the discount factor
+    self.gamma = gamma
+    # Unchanged from the previous section.
+    ...
+  
+  def train(self, env, batch_sz=64, updates=250):
+    # Storage helpers for a single batch of data.
+    actions = np.empty((batch_sz,), dtype=np.int32)
+    rewards, dones, values = np.empty((3, batch_sz))
+    observations = np.empty((batch_sz,) + env.observation_space.shape)
+
+    # Training loop: collect samples, send to optimizer, repeat updates times.
+    ep_rewards = [0.0]
+    next_obs = env.reset()
+    for update in range(updates):
+      for step in range(batch_sz):
+        observations[step] = next_obs.copy()
+        actions[step], values[step] = self.model.action_value(next_obs[None, :])
+        next_obs, rewards[step], dones[step], _ = env.step(actions[step])
+
+        ep_rewards[-1] += rewards[step]
+        if dones[step]:
+          ep_rewards.append(0.0)
+          next_obs = env.reset()
+          logging.info(&quot;Episode: %03d, Reward: %03d&quot; % (
+            len(ep_rewards) - 1, ep_rewards[-2]))
+
+      _, next_value = self.model.action_value(next_obs[None, :])
+
+      returns, advs = self._returns_advantages(rewards, dones, values, next_value)
+      # A trick to input actions and advantages through same API.
+      acts_and_advs = np.concatenate([actions[:, None], advs[:, None]], axis=-1)
+
+      # Performs a full training step on the collected batch.
+      # Note: no need to mess around with gradients, Keras API handles it.
+      losses = self.model.train_on_batch(observations, [acts_and_advs, returns])
+
+      logging.debug(&quot;[%d/%d] Losses: %s&quot; % (update + 1, updates, losses))
+
+    return ep_rewards
+
+  def _returns_advantages(self, rewards, dones, values, next_value):
+    # `next_value` is the bootstrap value estimate of the future state (critic).
+    returns = np.append(np.zeros_like(rewards), next_value, axis=-1)
+
+    # Returns are calculated as discounted sum of future rewards.
+    for t in reversed(range(rewards.shape[0])):
+      returns[t] = rewards[t] + self.gamma * returns[t + 1] * (1 - dones[t])
+    returns = returns[:-1]
+
+    # Advantages are equal to returns - baseline (value estimates in our case).
+    advantages = returns - values
+
+    return returns, advantages
+
+  def test(self, env, render=False):
+    # Unchanged from the previous section.
+    ...
+
+  def _value_loss(self, returns, value):
+    # Unchanged from the previous section.
+    ...
+
+  def _logits_loss(self, actions_and_advantages, logits):
+    # Unchanged from the previous section.
+    ...
+
+</code></pre>
+
+<h4 id="results">Results</h4>
+
+<p>We are now all set to train our single-worker A2C agent on CartPole-v0!
+The training process should take a couple of minutes.
+After the training is complete, you should see an agent achieve the target 200 out of 200 score.</p>
+
+<pre><code class="language-python">rewards_history = agent.train(env)
+print(&quot;Finished training, testing...&quot;)
+print(&quot;%d out of 200&quot; % agent.test(env)) # 200 out of 200
+</code></pre>
+
+<p><img src="https://thumbs.gfycat.com/SoupyConsciousGrayling-size_restricted.gif" alt="" /></p>
+
+<p>In the source code, I include some additional helpers that print out running episode rewards and losses,
+along with basic plotter for the rewards history.</p>
+
+<p><img src="https://i.imgur.com/cFwQgPB.png" alt="" /></p>
+
+<h2 id="static-computational-graph">Static Computational Graph</h2>
+
+<p>With all of this eager mode excitement, you might wonder if using a static graph is even possible anymore.
+Of course, it is! And it takes just one line!</p>
+
+<pre><code class="language-python">with tf.Graph().as_default():
+  print(tf.executing_eagerly()) # False
+
+  model = Model(num_actions=env.action_space.n)
+  agent = A2CAgent(model)
+
+  rewards_history = agent.train(env)
+  print(&quot;Finished training, testing...&quot;)
+  print(&quot;%d out of 200&quot; % agent.test(env)) # 200 out of 200
+</code></pre>
+
+<p>There is one caveat though: during static graph execution, we can not just have Tensors laying around,
+which is why we needed that trick with the separate <code>ProbabilityDistribution</code> model definition.
+In fact, while I was looking for a way to execute in static mode,
+I discovered one interesting low-level detail about models built through the Keras API&hellip;</p>
+
+<h2 id="one-more-thing">One More Thing…</h2>
+
+<p>Remember when I said TensorFlow runs in eager mode by default, even proving it with a code snippet? Well, I lied! Kind of.</p>
+
+<p>If you use Keras API to build and manage your models, then it attempts to compile them as static graphs under the hood.
+So what you end up with is the performance of static graphs with the flexibility of eager execution.</p>
+
+<p>You can check the status of your model via the <code>model.run_eagerly</code> flag.
+You can also force eager mode by manually setting it, though most of the times you probably don’t need to &ndash;
+if Keras detects that there is no way around eager mode, it backs off on its own.</p>
+
+<p>To illustrate that it is running as a static graph here is a simple benchmark:</p>
+
+<pre><code class="language-python"># Generate 100k observations to run benchmarks on.
+env = gym.make('CartPole-v0')
+obs = np.repeat(env.reset()[None, :], 100000, axis=0)
+</code></pre>
+
+<p><strong>Eager Benchmark</strong></p>
+
+<pre><code class="language-python">%%time
+
+model = Model(env.action_space.n)
+model.run_eagerly = True
+
+print(&quot;Eager Execution:  &quot;, tf.executing_eagerly())
+print(&quot;Eager Keras Model:&quot;, model.run_eagerly)
+
+_ = model(obs)
+
+######## Results #######
+
+Eager Execution:   True
+Eager Keras Model: True
+CPU times: user 639 ms, sys: 736 ms, total: 1.38 s
+</code></pre>
+
+<p><strong>Static Benchmark</strong></p>
+
+<pre><code class="language-python">%%time
+
+with tf.Graph().as_default():
+    model = Model(env.action_space.n)
+
+    print(&quot;Eager Execution:  &quot;, tf.executing_eagerly())
+    print(&quot;Eager Keras Model:&quot;, model.run_eagerly)
+
+    _ = model.predict_on_batch(obs)
+
+######## Results #######
+
+Eager Execution:   False
+Eager Keras Model: False
+CPU times: user 793 ms, sys: 79.7 ms, total: 873 ms
+</code></pre>
+
+<p><strong>Default Benchmark</strong></p>
+
+<pre><code class="language-python">%%time
+
+model = Model(env.action_space.n)
+
+print(&quot;Eager Execution:  &quot;, tf.executing_eagerly())
+print(&quot;Eager Keras Model:&quot;, model.run_eagerly)
+
+_ = model.predict_on_batch(obs)
+
+######## Results #######
+
+Eager Execution:   True
+Eager Keras Model: False
+CPU times: user 994 ms, sys: 23.1 ms, total: 1.02 s
+</code></pre>
+
+<p>As you can see, eager mode is behind static, and by default, our model was indeed executed statically,
+almost matching the explicitly static execution.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Hopefully, this has been an illustrative tour of both DRL and the shiny new things in TensorFlow 2.x.
+Note that many of the design choice discussions are <a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/developers" target="_blank">open to the public</a>,
+and everything is subject to change. If there is something about TensorFlow, you especially dislike (or like :) ), let the developers know!</p>
+
+<p>A lingering question people might have is if TensorFlow is better than PyTorch? Maybe. Maybe not.
+Both are excellent libraries, so it is hard to say one way or the other. If you are familiar with PyTorch,
+you probably noticed that TensorFlow 2.x has caught up and arguably avoided some of the PyTorch API pitfalls.</p>
+
+<p>At the same time, I think it would be fair to say that PyTorch was affected by the design choices of TensorFlow.
+What is clear is that this &ldquo;competition&rdquo; has resulted in a net-positive outcome for both camps!</p>
+
+    </div>
+
+    
+
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "inoryy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+
+    <p class="powered-by">
+
+      &copy; 2018&ndash;2020 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: { linebreaks: { automatic: true } },
+        tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+        TeX: { noUndefined: { attributes: { mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%' } } },
+        messageStyle: 'none'
+      });
+    </script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//inoryy.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
