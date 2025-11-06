@@ -42,7 +42,7 @@ My current research explores how Conversational Agents (CAs) can be integrated i
 
   const blogPosts = [
     {
-      title: 'Your First Blog Post',
+      title: 'Welcome to My Blog',
       date: 'Jan 1, 2024',
       readTime: '5 min read',
       excerpt: 'This is a sample blog post excerpt. Replace this with your actual blog post content.',
@@ -59,12 +59,22 @@ My current research explores how Conversational Agents (CAs) can be integrated i
 
   const research = [
     {
-      title: 'Project One',
+      title: 'TaleMate',
       description: 'A description of your first project. Explain what you built and what technologies you used.',
-      link: 'https://github.com/yourusername/project1',
+      link: 'https://github.com/pieon/CA_realtime',
     },
     {
-      title: 'Project Two',
+      title: 'The Love–Hate Spectrum of Technology Use in Minimalist Lifestyles',
+      description: '',
+      link: 'https://github.com/yourusername/project2',
+    },
+    {
+      title: 'Toysphere',
+      description: 'Another project showcasing your work. Include relevant details and outcomes.',
+      link: 'https://icat.vt.edu/projects/supported-research/sead-grants/2024-2025/major/toysphere.html',
+    },
+    {
+      title: '',
       description: 'Another project showcasing your work. Include relevant details and outcomes.',
       link: 'https://github.com/yourusername/project2',
     },
