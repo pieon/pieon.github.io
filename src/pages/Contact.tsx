@@ -1,4 +1,4 @@
-import { Container, Typography, Box, Paper, TextField, Button, Grid, IconButton } from '@mui/material';
+import { Container, Typography, Box, Paper, TextField, Button, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -21,9 +21,9 @@ const Contact = () => {
           Contact Me
         </Typography>
 
-        <Grid container spacing={4}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
           {/* Contact Form */}
-          <Grid item xs={12} md={6}>
+          <Box sx={{ flex: 1 }}>
             <Paper elevation={3} sx={{ p: 3 }}>
               <Typography variant="h5" gutterBottom>
                 Send a Message
@@ -71,10 +71,10 @@ const Contact = () => {
                 </Button>
               </Box>
             </Paper>
-          </Grid>
+          </Box>
 
           {/* Contact Information */}
-          <Grid item xs={12} md={6}>
+          <Box sx={{ flex: 1 }}>
             <Paper elevation={3} sx={{ p: 3 }}>
               <Typography variant="h5" gutterBottom>
                 Get in Touch
@@ -115,18 +115,18 @@ const Contact = () => {
                 <Typography variant="h6" gutterBottom>
                   Contact Information:
                 </Typography>
-                <Typography paragraph>
+                <Typography sx={{ mt: 1 }}>
                   Email: your.email@example.com<br />
                   Location: City, State<br />
                   Available for: Full-time positions, Internships, Freelance work
                 </Typography>
               </Box>
             </Paper>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </motion.div>
     </Container>
   );
 };
 
-export default Contact; 
+export default Contact;
