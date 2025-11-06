@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import About from '../components/sections/About';
 import BlogPosts from '../components/sections/BlogPosts';
-import Projects from '../components/sections/Projects';
+import Research from '../components/sections/Projects';
 import Talks from '../components/sections/Talks';
 import Teaching from '../components/sections/Teaching';
 import Footer from '../components/Footer';
@@ -12,31 +12,31 @@ const Home = () => {
     name: 'Jaehoon Pyon',
     title: 'Ph.D. Student',
     affiliation: 'Virginia Tech',
-    bio: `I am a 1st year Ph.D. student in Computer Science at Virginia Tech. I am a member of the Echo Lab, advised by Prof. Sang Won Lee. My research interests lie in human-computer interaction (HCI), with a focus on sustainable HCI (SHCI) and behavior change.
+    bio: `I am a 2nd year Ph.D. student in Computer Science at Virginia Tech. I am a member of the Echo Lab, advised by Prof. Sang Won Lee. My research interests lie in human-computer interaction (HCI), with a focus on behavior change and Human-AI Interaction (HAX).
 
-My current research focuses on studying the nuanced relationship between minimalism and technology by interviewing minimalists.`,
+My current research explores how Conversational Agents (CAs) can be integrated into group reading activities to enhance parent-child interactions and support the development of mathematical skills.`,
     interests: [
       'Human-Computer Interaction',
-      'Sustainable HCI',
       'Behavior Change',
+      'Human-AI Interaction',
     ],
     education: [
       {
         degree: 'Ph.D. in Computer Science',
-        institution: 'Virginia Tech',
+        institution: 'Virginia Tech University',
         period: '2024--Present',
       },
       {
-        degree: 'B.S. in Computer Science',
-        institution: 'Your University',
-        period: '2020--2024',
+        degree: 'B.A. in Computer Science',
+        institution: 'Bucknell University',
+        period: '2018--2024',
       },
     ],
     social: {
-      email: 'your.email@example.com',
-      github: 'https://github.com/yourusername',
-      linkedin: 'https://linkedin.com/in/yourusername',
-      scholar: 'https://scholar.google.com/citations?user=YOUR_ID',
+      email: 'pjaehoon@vt.edu',
+      github: 'https://github.com/pieon',
+      linkedin: 'https://www.linkedin.com/in/jaehoon-pyon-786b33254/',
+      scholar: 'https://scholar.google.com/citations?user=KcH5mFgAAAAJ&hl=en',
     },
   };
 
@@ -57,7 +57,7 @@ My current research focuses on studying the nuanced relationship between minimal
     },
   ];
 
-  const projects = [
+  const research = [
     {
       title: 'Project One',
       description: 'A description of your first project. Explain what you built and what technologies you used.',
@@ -72,15 +72,16 @@ My current research focuses on studying the nuanced relationship between minimal
 
   const talks = [
     {
-      title: 'Talk Title Here',
-      venue: 'Conference or University Name',
-      year: '2024',
-      link: 'https://example.com/talk',
+      title: 'ICAT Playdate - ToySphere',
+      venue: 'Virginia Tech University',
+      year: '2025',
+      link: 'https://icat.vt.edu/events/2025/10/icat-playdate---toysphere.html',
     },
     {
-      title: 'Another Talk',
-      venue: 'Another Venue',
-      year: '2023',
+      title: 'The 2025 CHCI Big Ideas Workshop',
+      venue: 'Virginia Tech University',
+      year: '2025',
+      link: 'https://chci.vt.edu/big-ideas-workshop-2025.html',
     },
   ];
 
@@ -88,14 +89,14 @@ My current research focuses on studying the nuanced relationship between minimal
     description: 'Teaching Assistant, Virginia Tech:',
     courses: [
       {
-        code: 'CS 1234',
-        name: 'Course Name',
-        semester: 'Spring 2024',
+        code: 'CS 3724',
+        name: 'Introduction to Human-Computer Interaction',
+        semester: 'Fall 2025',
       },
       {
-        code: 'CS 5678',
-        name: 'Another Course',
-        semester: 'Fall 2023',
+        code: 'CS 5244',
+        name: 'Web Application Development',
+        semester: 'Spring 2025',
       },
     ],
   };
@@ -104,7 +105,7 @@ My current research focuses on studying the nuanced relationship between minimal
     <Box>
       <About {...aboutData} />
       <BlogPosts posts={blogPosts} />
-      <Projects projects={projects} />
+      <Research Researches={research} />
       <Talks talks={talks} />
       <Teaching {...teaching} />
       <Footer />

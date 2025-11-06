@@ -1,21 +1,21 @@
 import { Box, Container, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
 
-interface Project {
+interface Research {
   title: string;
   description: string;
   image?: string;
   link: string;
 }
 
-interface ProjectsProps {
-  projects: Project[];
+interface ResearchProps {
+  Researches: Research[];
 }
 
-const Projects = ({ projects }: ProjectsProps) => {
+const Research = ({ Researches }: ResearchProps) => {
   return (
     <Box
-      id="projects"
+      id="Research"
       sx={{
         py: 8,
         backgroundColor: '#fff',
@@ -26,13 +26,13 @@ const Projects = ({ projects }: ProjectsProps) => {
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
           <Box sx={{ flex: { xs: '1', md: '0 0 33%' } }}>
             <Typography variant="h3" gutterBottom>
-              Projects
+              Research
             </Typography>
           </Box>
 
           <Box sx={{ flex: 1 }}>
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
-              {projects.map((project, index) => (
+              {Researches.map((project, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -106,4 +106,4 @@ const Projects = ({ projects }: ProjectsProps) => {
   );
 };
 
-export default Projects;
+export default Research;
