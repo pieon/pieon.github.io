@@ -65,12 +65,12 @@ My current research explores how Conversational Agents (CAs) can be integrated i
     },
     {
       title: 'The Love–Hate Spectrum of Technology Use in Minimalist Lifestyles',
-      description: '',
+      description: 'Minimalism as a lifestyle focuses on what is important while removing clutter; practitioners actively reduce excess possessions and engage in mindful consumption to promote sustainability and well-being. This study explores how minimalists extend or fail to extend their lifestyle to technology use and digital spaces, an underexplored relationship. We conducted interviews with 22 self-identified minimalists to understand how they select and utilize technology to sustain their lifestyle.',
       link: 'https://github.com/yourusername/project2',
     },
     {
       title: 'Toysphere',
-      description: 'Another project showcasing your work. Include relevant details and outcomes.',
+      description: 'This project aims to address the environmental impact of discarded toys. With 80% of toys ending up in landfills despite their potential for reuse, the project seeks to reduce waste by encouraging children and parents to make more sustainable decisions regarding end-of-life (EoL) toys.',
       link: 'https://icat.vt.edu/projects/supported-research/sead-grants/2024-2025/major/toysphere.html',
     },
     {
