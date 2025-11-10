@@ -22,6 +22,7 @@ interface AboutProps {
     linkedin?: string;
     scholar?: string;
   };
+  profileImage?: string;
 }
 
 const About = ({
@@ -32,6 +33,7 @@ const About = ({
   interests,
   education,
   social,
+  profileImage,
 }: AboutProps) => {
   return (
     <Box
@@ -55,17 +57,18 @@ const About = ({
             {/* Profile Column */}
             <Box sx={{ flex: { xs: '1', md: '0 0 33%' } }}>
               <Box sx={{ textAlign: 'center', p: 3 }}>
-                {/* Profile Picture Placeholder */}
+                {/* Profile Picture */}
                 <Box
                   sx={{
-                    width: 200,
-                    height: 200,
+                    width: 350,
+                    height: 350,
                     borderRadius: '50%',
                     backgroundColor: '#e0e0e0',
                     margin: '0 auto',
                     mb: 2,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    backgroundImage: profileImage ? `url(${profileImage})` : 'none',
                   }}
                 />
 

@@ -38,6 +38,7 @@ My current research explores how Conversational Agents (CAs) can be integrated i
       linkedin: 'https://www.linkedin.com/in/jaehoon-pyon-786b33254/',
       scholar: 'https://scholar.google.com/citations?user=KcH5mFgAAAAJ&hl=en',
     },
+    profileImage: '/profile.jpg', // Change this to your image filename
   };
 
   const blogPosts = [
@@ -60,23 +61,21 @@ My current research explores how Conversational Agents (CAs) can be integrated i
   const research = [
     {
       title: 'TaleMate',
-      description: 'A description of your first project. Explain what you built and what technologies you used.',
-      link: 'https://github.com/pieon/CA_realtime',
+      description: 'A conversational agent designed to enhance parent-child interactions during shared reading activities, with a focus on developing mathematical skills.',
+      link: '/research/talemate',
+      isInternal: true,
     },
     {
       title: 'The Love–Hate Spectrum of Technology Use in Minimalist Lifestyles',
-      description: 'Minimalism as a lifestyle focuses on what is important while removing clutter; practitioners actively reduce excess possessions and engage in mindful consumption to promote sustainability and well-being. This study explores how minimalists extend or fail to extend their lifestyle to technology use and digital spaces, an underexplored relationship. We conducted interviews with 22 self-identified minimalists to understand how they select and utilize technology to sustain their lifestyle.',
-      link: 'https://github.com/yourusername/project2',
+      description: 'This study explores the nuanced relationship between technology and minimalist lifestyles, examining both the benefits and challenges that technology presents',
+      link: '/research/minimalism',
+      isInternal: true,
     },
     {
       title: 'Toysphere',
       description: 'This project aims to address the environmental impact of discarded toys. With 80% of toys ending up in landfills despite their potential for reuse, the project seeks to reduce waste by encouraging children and parents to make more sustainable decisions regarding end-of-life (EoL) toys.',
-      link: 'https://icat.vt.edu/projects/supported-research/sead-grants/2024-2025/major/toysphere.html',
-    },
-    {
-      title: '',
-      description: 'Another project showcasing your work. Include relevant details and outcomes.',
-      link: 'https://github.com/yourusername/project2',
+      link: '/research/toysphere',
+      isInternal: true,
     },
   ];
 
@@ -91,12 +90,12 @@ My current research explores how Conversational Agents (CAs) can be integrated i
       title: 'The 2025 CHCI Big Ideas Workshop',
       venue: 'Virginia Tech University',
       year: '2025',
-      link: 'https://chci.vt.edu/big-ideas-workshop-2025.html',
+      link: 'https://hci.icat.vt.edu/workshops/chci-ninth-annual-workshop.html',
     },
   ];
 
   const teaching = {
-    description: 'Teaching Assistant, Virginia Tech:',
+    description: 'Graduate Teaching Assistant, Virginia Tech:',
     courses: [
       {
         code: 'CS 3724',

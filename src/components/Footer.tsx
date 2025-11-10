@@ -17,7 +17,7 @@ const Footer = () => {
         borderTop: '1px solid #e0e0e0',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
             © {new Date().getFullYear()}

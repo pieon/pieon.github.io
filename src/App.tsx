@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Resume from './pages/Resume';
 import Academic from './pages/Academic';
 import Contact from './pages/Contact';
+import TaleMate from './pages/research/TaleMate';
+import Minimalism from './pages/research/Minimalism';
+import Toysphere from './pages/research/Toysphere';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/academic" element={<Academic />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/research/talemate" element={<TaleMate />} />
+          <Route path="/research/minimalism" element={<Minimalism />} />
+          <Route path="/research/toysphere" element={<Toysphere />} />
         </Routes>
       </Router>
     </ThemeProvider>

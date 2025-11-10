@@ -1,11 +1,13 @@
 import { Box, Container, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface Research {
   title: string;
   description: string;
   image?: string;
   link: string;
+  isInternal?: boolean;
 }
 
 interface ResearchProps {
@@ -22,8 +24,8 @@ const Research = ({ Researches }: ResearchProps) => {
         minHeight: '100vh',
       }}
     >
-      <Container maxWidth="lg">
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
+      <Container maxWidth="xl">
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2.75 }}>
           <Box sx={{ flex: { xs: '1', md: '0 0 33%' } }}>
             <Typography variant="h3" gutterBottom>
               Research
@@ -55,10 +57,11 @@ const Research = ({ Researches }: ResearchProps) => {
                   >
                     {project.image && (
                       <CardMedia
-                        component="a"
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        component={project.isInternal ? RouterLink : 'a'}
+                        to={project.isInternal ? project.link : undefined}
+                        href={!project.isInternal ? project.link : undefined}
+                        target={!project.isInternal ? '_blank' : undefined}
+                        rel={!project.isInternal ? 'noopener noreferrer' : undefined}
                         sx={{
                           height: 200,
                           backgroundSize: 'cover',
@@ -78,18 +81,31 @@ const Research = ({ Researches }: ResearchProps) => {
                           fontWeight: 700,
                         }}
                       >
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            color: '#000',
-                            textDecoration: 'none',
-                            borderBottom: 'solid 1px transparent',
-                          }}
-                        >
-                          {project.title}
-                        </a>
+                        {project.isInternal ? (
+                          <RouterLink
+                            to={project.link}
+                            style={{
+                              color: '#000',
+                              textDecoration: 'none',
+                              borderBottom: 'solid 1px transparent',
+                            }}
+                          >
+                            {project.title}
+                          </RouterLink>
+                        ) : (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: '#000',
+                              textDecoration: 'none',
+                              borderBottom: 'solid 1px transparent',
+                            }}
+                          >
+                            {project.title}
+                          </a>
+                        )}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {project.description}

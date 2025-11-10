@@ -23,8 +23,8 @@ const BlogPosts = ({ posts }: BlogPostsProps) => {
         minHeight: '100vh',
       }}
     >
-      <Container maxWidth="lg">
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
+      <Container maxWidth="xl">
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2.75 }}>
           <Box sx={{ flex: { xs: '1', md: '0 0 33%' } }}>
             <Typography variant="h3" gutterBottom>
               Blog Posts

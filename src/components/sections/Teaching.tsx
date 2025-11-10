@@ -22,7 +22,7 @@ const Teaching = ({ description, courses }: TeachingProps) => {
         minHeight: '50vh',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
