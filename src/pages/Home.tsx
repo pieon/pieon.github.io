@@ -43,7 +43,7 @@ My current research explores how Conversational Agents (CAs) can be integrated i
 
   const blogPosts = [
     {
-      title: 'Welcome to My Blog',
+      title: 'Exploring take-back recovery strategies in the Circular Economy',
       date: 'Jan 1, 2024',
       readTime: '5 min read',
       excerpt: 'This is a sample blog post excerpt. Replace this with your actual blog post content.',
@@ -67,16 +67,24 @@ My current research explores how Conversational Agents (CAs) can be integrated i
     },
     {
       title: 'The Love–Hate Spectrum of Technology Use in Minimalist Lifestyles',
+      authors: '<b>Jaehoon Pyon</b>, Carlos Augusto Bautista Isaza, Yoon Jung Choi, Eunjeong Cheon, Sang Won Lee',
       description: 'This study explores the nuanced relationship between technology and minimalist lifestyles, examining both the benefits and challenges that technology presents',
       link: '/research/minimalism',
       isInternal: true,
+    },
+    {
+      title: 'Exploring take-back recovery strategies in the Circular Economy',
+      authors: 'Yoon Jung Choi, Jiayuan Dong, <b>Jaehoon Pyon</b>',
+      description: 'This research investigates various take-back recovery strategies within the framework of the Circular Economy, aiming to enhance sustainability and resource efficiency.',
+      link: '/research/takeback-recovery-strategies',
+      isInternal: false,
     },
     {
       title: 'Toysphere',
       description: 'This project aims to address the environmental impact of discarded toys. With 80% of toys ending up in landfills despite their potential for reuse, the project seeks to reduce waste by encouraging children and parents to make more sustainable decisions regarding end-of-life (EoL) toys.',
       link: '/research/toysphere',
       isInternal: true,
-    },
+    }
   ];
 
   const talks = [
