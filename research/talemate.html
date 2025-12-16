@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>TaleMate Research | Jaehoon Pyon</title>
+  <meta name="description" content="TaleMate: A conversational agent designed to enhance parent-child interactions during shared reading activities, focusing on mathematical skills development through Learning by Teaching methods.">
+  <meta name="keywords" content="TaleMate, Conversational Agent, HCI, Learning by Teaching, Parent-Child Interaction">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TaleMate - Jaehoon Pyon Research">
+  <meta property="og:description" content="Conversational agent for parent-child reading activities">
+  <meta property="og:url" content="https://www.jaehoonpyon.com/research/talemate.html">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container-lg navbar-content">
+      <a href="../index.html" class="navbar-brand">Jaehoon Pyon</a>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle menu">
+        ☰
+      </button>
+
+      <ul id="nav-menu" class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="../resume.html" class="nav-link">Resume</a></li>
+        <li class="nav-item"><a href="../academic.html" class="nav-link">Academic</a></li>
+        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="navbar-spacer"></div>
+
+  <!-- Content -->
+  <main class="py-8">
+    <div class="container">
+      <a href="../index.html" class="btn btn-outline btn-with-icon mb-4">
+        <span>←</span>
+        <span>Back to Home</span>
+      </a>
+
+      <h2 class="mb-3">TaleMate (In Progress)</h2>
+
+      <h5 class="mt-4 mb-2">Abstract</h5>
+      <p>
+        Group reading activity requires caregivers' cognitive and physical efforts, but its benefit for children's skill development has been proven.
+        Hence, systems supporting group reading between parent and child have been studied, many utilizing a Conversational Agent (CA) to provide personalized experiences.
+        Current systems limit the CA's role as tutor, but the CA as a tutee can encourage active learning leading to improved engagement and learning.
+        We developed TaleMate to facilitate active learning by providing a tutee CA that allows learn through teaching and assists the caregivers to provide adequate scaffolding for the children.
+        TaleMate provides a learning objective to the parent, and the learning process is facilitated using the Learning by Teaching (LdL) method.
+        For the LdL, the CA acts as a struggling peer requiring help to comprehend the learning objective, and children teach the CA, forcing deeper analysis and construction of knowledge.
+        Meanwhile, peer CA provides guidelines for successful scaffolding to both children and caregivers through a question, with caregivers' answers serving as scaffolds to aid the children.
+        The children's engagement is measured by the skip rate of the teaching activity and the time spent on each LdL session. Next, learning progress is measured by the correctness of the children's answers during the LdL activity.
+      </p>
+
+      <h5 class="mt-4 mb-2">TaleMate System</h5>
+      <div class="text-center mt-3 mb-4">
+        <img src="../images/TaleMateSample.png" alt="TaleMate System Interface" style="max-width: 100%; height: auto;">
+      </div>
+
+      <a href="https://dl.acm.org/doi/10.1145/3586182.3616699" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-4">
+        View Prior Work
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container-lg">
+      <div class="footer-content">
+        <p class="footer-text">© 2024 Jaehoon Pyon</p>
+        <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+</body>
+</html>
