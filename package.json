@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "action": "^0.0.1",
+    "github": "^14.0.0"
+  }
+}
