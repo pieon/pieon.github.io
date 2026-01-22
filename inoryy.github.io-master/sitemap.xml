@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://inoryy.com/home/about/</loc>
+    
+      <lastmod>2019-01-06T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/home/posts/</loc>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/home/projects/</loc>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/home/talks/</loc>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/home/teaching/</loc>
+    
+      <lastmod>2018-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/post/next-gen-ml-tools/</loc>
+    
+      <lastmod>2020-01-22T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/post/starcraft2-next-big-thing-ai/</loc>
+    
+      <lastmod>2019-01-24T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/</loc>
+    
+      <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/project/reaver-drl/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/project/csb-starter/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/post/why-study-statistics-for-artificial-intelligence/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0.5</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/tags/bot-programming/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/categories/</loc>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/home/</loc>
+    
+      <lastmod>2019-01-06T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/post/</loc>
+    
+      <lastmod>2020-01-22T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/project/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/publication_types/</loc>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/tags/reinforcement-learning/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/</loc>
+    
+      <lastmod>2019-01-06T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/tags/</loc>
+    
+      <lastmod>2019-01-05T00:00:00+00:00</lastmod>
+    
+    
+      <changefreq>weekly</changefreq>
+    
+    
+      <priority>0</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://inoryy.com/files/ring_roman_cv.pdf</loc>
+    <lastmod>2019-01-06</lastmod>
+  </url>
+  <url>
+    <loc>http://inoryy.com/files/ring_roman_bsc.pdf</loc>
+    <lastmod>2019-01-06</lastmod>
+  </url>
+  <url>
+    <loc>http://inoryy.com/files/pointer_networks_essay.pdf</loc>
+    <lastmod>2019-01-06</lastmod>
+  </url>
+  <url>
+    <loc>http://inoryy.com/files/starcraft2_imitation_learning.pdf</loc>
+    <lastmod>2019-01-08</lastmod>
+  </url>
+</urlset>

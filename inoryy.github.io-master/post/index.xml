@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Roman Ring</title>
+    <link>http://inoryy.com/post/</link>
+    <description>Recent content in Posts on Roman Ring</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018--2020</copyright>
+    <lastBuildDate>Wed, 22 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://inoryy.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Next Generation of Machine Learning Tools</title>
+      <link>http://inoryy.com/post/next-gen-ml-tools/</link>
+      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/next-gen-ml-tools/</guid>
+      <description>Table of Contents    Introduction Tools in ML Research A Need for Innovation The Next Generation  Swift for TensorFlow JAX  Conclusion References    
+Introduction Let&amp;rsquo;s travel back to a simpler time when all everyone talked about in machine learning were SVMs and boosted trees, while Andrew Ng introduced neural networks as a neat party hat trick you would probably never use in practice1.</description>
+    </item>
+    
+    <item>
+      <title>StarCraft II: Next Big Thing in AI</title>
+      <link>http://inoryy.com/post/starcraft2-next-big-thing-ai/</link>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/starcraft2-next-big-thing-ai/</guid>
+      <description>Couple of days ago out of the blue DeepMind announced a StarCraft II related event, with many of the employees being quite excited about it on twitter. In just a few hours we will see what DeepMind has in store for us, but in the meantime let&amp;rsquo;s take a step back and review how we got here and why it is so important.
+Update: the (amazing) event has finished and DeepMind have released a very detailed write-up.</description>
+    </item>
+    
+    <item>
+      <title>Deep Reinforcement Learning With TensorFlow 2.1</title>
+      <link>http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/</link>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/</guid>
+      <description>Table of Contents    Introduction Setup    GPU Support   Reinforcement Learning    Deep Reinforcement Learning (Asynchronous) Advantage Actor-Critic   Advantage Actor-Critic With TensorFlow 2.1    Policy &amp;amp; Value Models via Keras API Agent Interface Loss / Objective Function The Training Loop Results   Static Computational Graph One More Thing… Conclusion    
+Introduction In this tutorial, I will give an overview of the TensorFlow 2.</description>
+    </item>
+    
+    <item>
+      <title>Why I Majored in Statistics for a Career in Artificial Intelligence</title>
+      <link>http://inoryy.com/post/why-study-statistics-for-artificial-intelligence/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/post/why-study-statistics-for-artificial-intelligence/</guid>
+      <description>Undergraduate major is often the first significant career decision a person makes in his life. As artificial intelligence (AI) becomes more and more ingrained in our society, many people begin to consider a career in AI as a viable choice in their life. However, it is still very rare to have an undergraduate degree fully dedicated to AI, so people opt for what they perceive to be the next best thing - computer science.</description>
+    </item>
+    
+  </channel>
+</rss>

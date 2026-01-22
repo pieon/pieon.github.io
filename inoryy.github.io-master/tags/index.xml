@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Roman Ring</title>
+    <link>http://inoryy.com/tags/</link>
+    <description>Recent content in Tags on Roman Ring</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018--2020</copyright>
+    <lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://inoryy.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bot Programming</title>
+      <link>http://inoryy.com/tags/bot-programming/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/tags/bot-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning</title>
+      <link>http://inoryy.com/tags/reinforcement-learning/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://inoryy.com/tags/reinforcement-learning/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

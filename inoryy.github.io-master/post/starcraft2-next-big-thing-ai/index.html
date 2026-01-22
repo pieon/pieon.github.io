@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-18538959-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-18538959-6');
+    </script>
+  
+  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.52" />
+  <meta name="author" content="Roman Ring">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="After winning against Go world champion Lee Sedol in 2016, DeepMind has announced the  next challenge they will focus on: StarCraft II. Today they are finally ready to unveil *something* at 6PM GMT and with this blog post I want to help both StarCraft players and AI researchers appreciate the scope of what they&#39;re about to experience. I will give a brief overview of the challenge, address some of the common misconceptions, and speculate a bit on what we&#39;ll see.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://inoryy.com/post/starcraft2-next-big-thing-ai/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  <link rel="alternate" href="http://inoryy.com/index.xml" type="application/rss+xml" title="Roman Ring">
+  <link rel="feed" href="http://inoryy.com/index.xml" type="application/rss+xml" title="Roman Ring">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="http://inoryy.com/post/starcraft2-next-big-thing-ai/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@inoryy">
+  <meta property="twitter:creator" content="@inoryy">
+  
+  <meta property="og:site_name" content="Roman Ring">
+  <meta property="og:url" content="http://inoryy.com/post/starcraft2-next-big-thing-ai/">
+  <meta property="og:title" content="StarCraft II: Next Big Thing in AI | Roman Ring">
+  <meta property="og:description" content="After winning against Go world champion Lee Sedol in 2016, DeepMind has announced the  next challenge they will focus on: StarCraft II. Today they are finally ready to unveil *something* at 6PM GMT and with this blog post I want to help both StarCraft players and AI researchers appreciate the scope of what they&#39;re about to experience. I will give a brief overview of the challenge, address some of the common misconceptions, and speculate a bit on what we&#39;ll see.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-01-24T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-01-24T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>StarCraft II: Next Big Thing in AI | Roman Ring</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Roman Ring</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/ring_roman_cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">StarCraft II: Next Big Thing in AI</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Roman Ring">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-01-24 00:00:00 &#43;0000 GMT" itemprop="datePublished">
+    <time datetime="2019-01-24 00:00:00 &#43;0000 GMT" itemprop="dateModified">
+      Jan 24, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Roman Ring">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="http://inoryy.com/post/starcraft2-next-big-thing-ai/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=StarCraft%20II%3a%20Next%20Big%20Thing%20in%20AI&amp;url=http%3a%2f%2finoryy.com%2fpost%2fstarcraft2-next-big-thing-ai%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2finoryy.com%2fpost%2fstarcraft2-next-big-thing-ai%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2finoryy.com%2fpost%2fstarcraft2-next-big-thing-ai%2f&amp;title=StarCraft%20II%3a%20Next%20Big%20Thing%20in%20AI"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2finoryy.com%2fpost%2fstarcraft2-next-big-thing-ai%2f&amp;title=StarCraft%20II%3a%20Next%20Big%20Thing%20in%20AI"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=StarCraft%20II%3a%20Next%20Big%20Thing%20in%20AI&amp;body=http%3a%2f%2finoryy.com%2fpost%2fstarcraft2-next-big-thing-ai%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Couple of days ago out of the blue DeepMind announced a StarCraft II related event, with many of the employees being quite excited about it on twitter. In just a few hours we will see what DeepMind has in store for us, but in the meantime let&rsquo;s take a step back and review how we got here and why it is so important.</p>
+
+<p><strong>Update</strong>: the (amazing) event has finished and DeepMind have released a <a href="https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/" target="_blank">very detailed write-up</a>. See below for my thoughts on the event and the write-up.</p>
+
+<h1 id="deepmind">DeepMind</h1>
+
+<p>At the end of 2013, DeepMind was a small and relatively unknown startup, founded three years prior with one simple goal: &ldquo;to solve intelligence&rdquo;. Although not yet famous with the general public, they have made a lot of noise in the world of deep reinforcement learning by introducing <a href="https://deepmind.com/research/dqn/" target="_blank">DQN</a> - an algorithm, capable of matching or even surpassing humans at playing the Atari video games, while observing the game from raw pixels similar to how a human would. In the early 2014 DeepMind was bought by Google Inc. for $500 million, many speculating that deal was ensured by this one achievement.</p>
+
+<figure>
+  <img src="https://raw.githubusercontent.com/kuz/DeepMind-Atari-Deep-Q-Learner/master/gifs/breakout.gif"  />
+  <figcaption style="text-align: center;">
+      <small>Atari game of Breakout, played by DQN agent. <a href="https://github.com/kuz/DeepMind-Atari-Deep-Q-Learner">Source</a>.</small>
+  </figcaption>
+</figure>
+
+<p>In March of 2016 DeepMind did it again, with their <a href="https://deepmind.com/research/alphago/" target="_blank">AlphaGo</a> program decisively winning against Go world champion Lee Sedol, who held the title for a great number of years. While in hindsight this seems as a sure thing, three years ago this win came almost out of nowhere, with many researchers at the time were predicting that AI will not match human experts for another 10 years at least.</p>
+
+<figure>
+  <img src="https://i.imgur.com/NNIEdt5.jpg"  />
+  <figcaption style="text-align: center;">
+      <small>DeepMind's AlphaGo winning vs Lee Sedol. <a href="https://www.engadget.com/2016/03/12/watch-alphago-vs-lee-sedol-round-3-live-right-now/">Source</a>.</small>
+  </figcaption>
+</figure>
+
+<h1 id="starcraft-ii">StarCraft II</h1>
+
+<p>Shortly after DeepMind&rsquo;s AlphaGo victory, DeepMind were already prepared to announce the next challenge they will be tackling: the StarCraft II video game. StarCraft II is a real-time strategy game that requires making split second decisions on strategical, tactical, and economical levels, with short-term and long-term goals, throughout the whole duration of the game. Together with its predecessor StarCraft: Brood War, it has a rich competitive e-sports history spanning over 20 years, and is actively played by millions to this day.</p>
+
+<figure>
+  <img src="https://i.imgur.com/yaOixgL.png"  />
+  <figcaption style="text-align: center;">
+      <small>Serral securing his world championship title at WCS 2018. <a href="https://youtu.be/ZO9kqMGK190">Source</a>.</small>
+  </figcaption>
+</figure>
+
+<p>With much bigger state and action spaces, real-time component, partial observability, and longer game duration, this is a much more difficult task than any attempted before. In fact many AI researchers have actually attempted to tackle it, notably the StarCraft: Brood War bot <a href="https://arstechnica.com/gaming/2011/01/skynet-meets-the-swarm-how-the-berkeley-overmind-won-the-2010-starcraft-ai-competition/" target="_blank">OverMind</a> was a collaborative effort of many talented scientists. Yet, when pitted against human players, the AI champion would be easily defeated even by relative novices to the game.</p>
+
+<p>This massive challenge alone wasn&rsquo;t enough for DeepMind researchers, they decided to go one step further. They wanted to not only challenge human experts, but do so &ldquo;on their terms&rdquo;. The AI will be observing the game in a similar way to humans, through image-like features, and will be acting by emulating keyboard and mouse commands as close as possible.</p>
+
+<figure>
+  <img src="https://i.imgur.com/9FQkrkJ.jpg"  />
+  <figcaption style="text-align: center;">
+      <small>On the right: StarCraft II game as seen by the AI. <a href="https://deepmind.com/blog/deepmind-and-blizzard-open-starcraft-ii-ai-research-environment/">Source</a>.</small>
+  </figcaption>
+</figure>
+
+<p>Furthermore, the AI is limited in many aspects to match human experiences, e.g. it is allowed to take a limited number of actions per minute (APM) and can only access the same information a human would see on the screen or minimap. This means that the AI must learn to use in-game camera in order to effectively play.</p>
+
+<figure>
+  <img src="https://storage.googleapis.com/deepmind-live-cms/documents/Oriol-Fig-Anim-170809-Optimised-r03.gif"  />
+  <figcaption style="text-align: center;">
+      <small>StarCraft II AI emulates actions as close to humans as possible. <a href="https://deepmind.com/blog/deepmind-and-blizzard-open-starcraft-ii-ai-research-environment/">Source</a>.</small>
+  </figcaption>
+</figure>
+
+<h1 id="the-next-big-thing-in-ai">The Next Big Thing in AI</h1>
+
+<p>A StarCraft II player might wonder what is special about this if there were relatively good AIs built into the game from release. The AI you encounter in-game acts based on some pre-defined set of rules, which means it can only play as well as the person who programmed it, reacting only to foreseen events. This makes the AI inflexible, and easy to exploit, among other things.</p>
+
+<p>In contrast, the AI DeepMind is working on learns the game by itself, essentially from scratch. At each step all it has is the game state it observed, the actions it can take, and some reward stimulus it received for a previous action. In general the approach is called reinforcement learning and <a href="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/" target="_blank">here</a> I give a brief overview of the field.</p>
+
+<p>To get a feel for what it&rsquo;s like for an RL agent to &ldquo;learn&rdquo; the game, here is a video of an agent attempting to tackle a set of minigames released by DeepMind. On the left you can see an agent that just started the process and is exploring all the various actions it can take, and on the right is the same agent after a fair bit of such experiments (about 50 million steps on average).</p>
+
+<p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/gEyBzcPU5-w" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br/></p>
+
+<p>An outside reader might wonder why AI researchers focus so much on games to begin with. The answer is simple: real-world is just too complex for an AI system at this point - one must first learn to walk before he gets to fly. Specifically, games have easily defined rules that can be described to an AI system and are typically easy to run in parallel on a computer, speeding up the learning process.</p>
+
+<p>This however does not mean that current work will be useless in the future. For example, while &ldquo;playing&rdquo; with StarCraft II, DeepMind researchers produced a number of general-purpose results such as the <a href="https://deepmind.com/blog/population-based-training-neural-networks/" target="_blank">population based training</a>, and <a href="https://openreview.net/forum?id=HkxaFoC9KQ" target="_blank">relational deep reinforcement learning</a>. So while developing an AI capable of winning in StarCraft II with human-like restrictions <em>probably</em> won&rsquo;t give us <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence" target="_blank">AGI</a>, it will definitely bring us an inch closer.</p>
+
+<h1 id="predictions-and-speculations">Predictions and Speculations</h1>
+
+<p>In this section I will attempt to predict some of the things we will see at the event, along with the nitty-gritty details &ldquo;under the hood&rdquo; of the AI, which might get a bit technical. Note that I have no insider information, this is simply my guesses.</p>
+
+<p>For the event itself I believe it will be a Protoss vs Protoss showmatch between DeepMind&rsquo;s AI and some high level player, either ex-pro or possibly even current pro, however not best of the best tier. I would be <em>really</em> surprised if they are already at a level to challenge world champions.</p>
+
+<p>The core algorithm they will employ will be an <code>actor-critic</code> variant called <a href="https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/" target="_blank">IMPALA</a>, fused with <code>attention</code> mechanism as described in <a href="https://openreview.net/forum?id=HkxaFoC9KQ" target="_blank">Relational DRL</a>. Network architecture will have <code>residual + convolutional</code> state encoder component and a number of <code>Conv LSTM</code> blocks generating the policy. It will also have a fair bit of <code>imitation learning</code> based pre-training prior to the DRL loop.</p>
+
+<p>The <code>IMPALA</code> algorithm is essentially a distributed, asyncronous version of <code>A2C</code> I&rsquo;ve described in <a href="http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/" target="_blank">this</a> blog with a number of fixes (e.g. importance weighting) to address its &ldquo;off-policyness&rdquo; - the fact that samples are gathered with a different policy than the one being currently trained. If you&rsquo;re familiar with <a href="https://blog.openai.com/openai-five/" target="_blank">openAI Five</a> then the core idea is similar to their asyncronous PPO: a (massively) distributed advantage actor-critic variant with tricks to correct for the distributional drift.</p>
+
+<p>The <code>attention</code> mechanism has revolutionized the world of NLP, especially after the &ldquo;<a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention is All You Need</a>&rdquo; article came out. In short, if we&rsquo;re dealing with sequential input / output then attention mechanism acts as importance weight for items in the given sequence when generating the next output. In NLP this is most often used for machine translation to give attention to words at different parts of the sentence. In StarCraft II this could be used to ensure the agent can quickly switch between tactical and strategical decision making. DeepMind has recently applied it to DRL in their <a href="https://openreview.net/forum?id=HkxaFoC9KQ" target="_blank">Relational DRL</a> article.</p>
+
+<p>The <code>residual + convolutional</code> architecture makes sense to use given our state space, whereas <code>Conv LSTM</code> cells (NB! different from <em>CNN</em> LSTM) are starting to gain traction in DRL world, especially when observations are rich with spatial information.</p>
+
+<p>During Blizzcon 2018 presentation Oriol Vinyals mentioned that they&rsquo;ve used <code>imitation learning</code> for their agent - and it of course make sense, given that Blizzard is providing free access (to everybody!) to their massive dataset of replays. Of course it would be impossible to succesfully train a full agent from replays alone, but I think it&rsquo;s reasonable to use it for NN weights pre-training.</p>
+
+<p>I also wouldn&rsquo;t be surprised if instead of fully end-to-end approach DeepMind will rely on something modular, e.g. as described <a href="https://arxiv.org/abs/1811.03555" target="_blank">here</a>, where individual modules are responsible for specific subsets of the game. Specifically, perhaps DeepMind relies on pre-defined rulesets for scouting and makes use of a simplified game engine for battle simulations that are used in MCTS solver to determine whether they should attack or fall back.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Hopefully you&rsquo;re now as excited as I am about the upcoming event. Whether the AI is fully end to end or not and whether they will be able to win vs human experts or not, it is still a massive endeavor and should provide for a good show. And if you&rsquo;d like to get into developing StarCraft II based AIs yourself, join our <a href="https://discordapp.com/invite/Emm5Ztz" target="_blank">SC2AI community on discord</a>!</p>
+
+<h1 id="post-event-write-up">Post-Event Write-Up</h1>
+
+<p>The stream was very exciting to watch, both as a player and a researcher. It was funny to see AlphaStar opt for wild strategies and then come out on top. It was also interesting to see it make mistakes such as killing its own units, very AI and human-like behavior at the same time.</p>
+
+<p>To me the most impressive was the micro, and not just due to its ability to make split second decisions. The way AlphaStar knew how to pull back damaged stalkers to regenerate shields, the way it pulled its workers when it saw Oracles - really mind boggling that a single end-to-end neural network is capable of such a rich variety of tactical and somewhat long-term decision-making.</p>
+
+<p>However, AlphaStar is still quite far from conquering StarCraft II universe. First, while Mana is no doubt a great player, he is not quite world champion caliber. Second, this is still a single matchup, whereas any human player would be expected to play vs all three races on the same level. Third, I&rsquo;m not sure how I feel about having players go against a pool of AlphaStar(s) - I think it definitely makes sense to use for training, but during inference I&rsquo;d prefer to see a single version used throughout the matches. Overall I would say AlphaStar right now is closer to the AlphaGo version that played vs Fan Hui than the one that won vs Lee Sedol.</p>
+
+<p>Seems that I&rsquo;ve correctly predicted the match-up and level of play, along with some of the approaches. Specifically, AlphaStar does indeed rely on <code>imitation learning</code>, <code>IMPALA</code>, and <code>attention</code> mechanism, though not quite as described in Relational DRL article. They also indeed use <code>LSTM</code>, but I am not so sure with regards to <code>convolutional</code> layers - there seems to be a bit of confusion as to what interface they ended up using. I&rsquo;ve also briefly mentioned <code>population based training</code> - seems that DeepMind uses an advanced variant of it, hopefully we will see an article about it soon.</p>
+
+<p>Of the things I&rsquo;ve missed is the <a href="https://arxiv.org/abs/1706.03762" target="_blank">transformer</a> body, which is a state-of-the-art architecture in machine translation. Very surprised to see it applied in DRL. They also use a relatively novel baseline for the <code>advantage function</code> in the PG loss, which they pulled from the <a href="https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf" target="_blank">Counterfactual Multi-Agent Policy Gradients</a> article. This is noteworthy because for the longest time the value estimate of next state for baseline was the go-to approach of pretty much everybody in DRL.</p>
+
+<p>Finally, they apply <a href="https://arxiv.org/abs/1506.03134" target="_blank">pointer network</a> to the policy output, most likely as an efficient way to deal with variable length of action arguments. To me the use of <code>pointer networks</code> was quite surprising and somewhat ironic - I have actually <a href="http://inoryy.com/files/pointer_networks_essay.pdf" target="_blank">written an essay</a> on this article and while it was an interesting subject, it never crossed my mind it could be applied in such a way to DRL policies. Although in retrospect I guess it makes sense.</p>
+
+<p>During training they also rely on <a href="http://proceedings.mlr.press/v80/oh18b/oh18b.pdf" target="_blank">self-imitation</a> and <code>experience replay</code>, which is quite interesting - seems they have finally perfected the combination of <code>actor-critic methods</code>, which are traditionally seen as <code>on-policy</code>, with the benefits of <code>off-policy</code> algorithms. Finally, they use <a href="https://arxiv.org/pdf/1511.06295.pdf" target="_blank">policy distillation</a> which is probably how they were able to fit the final agents into a single machine for inference.</p>
+
+<p>If by now your head is spinning from all the terminology, don&rsquo;t worry - mine is too. The takeaway message is that it took an impressive amount of very advanced approaches to achieve the level of play we have seen today and I am curious to see what happens next.</p>
+
+    </div>
+
+    
+
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "inoryy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+
+    <p class="powered-by">
+
+      &copy; 2018&ndash;2020 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: { linebreaks: { automatic: true } },
+        tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+        TeX: { noUndefined: { attributes: { mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%' } } },
+        messageStyle: 'none'
+      });
+    </script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//inoryy.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
