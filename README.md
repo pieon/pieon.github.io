@@ -109,7 +109,7 @@ If you want to keep the portfolio in a subfolder:
 
 1. Deploy using Option 1 (root deployment)
 2. In repository Settings → Pages → Custom domain
-3. Enter your domain: `www.jaehoonpyon.com`
+3. Enter your domain: `pieon.github.io`
 4. Update DNS records at your domain registrar:
    ```
    Type    Name    Value
@@ -224,31 +224,31 @@ Create `sitemap.xml` in the root:
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.jaehoonpyon.com/</loc>
+    <loc>https://pieon.github.io/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/resume.html</loc>
+    <loc>https://pieon.github.io/resume.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/academic.html</loc>
+    <loc>https://pieon.github.io/academic.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/contact.html</loc>
+    <loc>https://pieon.github.io/contact.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/research/talemate.html</loc>
+    <loc>https://pieon.github.io/research/talemate.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/research/minimalism.html</loc>
+    <loc>https://pieon.github.io/research/minimalism.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.jaehoonpyon.com/research/toysphere.html</loc>
+    <loc>https://pieon.github.io/research/toysphere.html</loc>
     <priority>0.9</priority>
   </url>
 </urlset>

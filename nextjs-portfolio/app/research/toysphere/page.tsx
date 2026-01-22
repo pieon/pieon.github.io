@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Toysphere - Sustainable Toy Lifecycle Project',
     description: 'Promoting sustainable toy reuse through virtual reality',
-    url: 'https://www.jaehoonpyon.com/research/toysphere',
+    url: 'https://pieon.github.io/research/toysphere',
     type: 'article',
   },
 };

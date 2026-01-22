@@ -58,7 +58,7 @@ git push origin main
 
 - GitHub Pages will automatically build and deploy your site
 - This takes 1-2 minutes
-- Visit: `https://pieon.github.io` or `https://www.jaehoonpyon.com`
+- Visit: `https://pieon.github.io`
 
 ## Alternative: Deploy from Subfolder
 
@@ -117,46 +117,9 @@ After deployment, test your site:
 - Check file names match exactly (case-sensitive)
 - Ensure images are committed to git
 
-## Custom Domain Setup
+## Custom Domain Setup (Optional)
 
-If you want to use `www.jaehoonpyon.com`:
-
-### Step 1: Create CNAME file
-
-```bash
-# In repository root
-echo "www.jaehoonpyon.com" > CNAME
-git add CNAME
-git commit -m "Add custom domain"
-git push origin main
-```
-
-### Step 2: Configure DNS
-
-At your domain registrar, add these DNS records:
-
-```
-Type    Name    Value                    TTL
-A       @       185.199.108.153          3600
-A       @       185.199.109.153          3600
-A       @       185.199.110.153          3600
-A       @       185.199.111.153          3600
-CNAME   www     pieon.github.io          3600
-```
-
-### Step 3: Enable in GitHub Settings
-
-1. Go to Settings → Pages
-2. Custom domain: Enter `www.jaehoonpyon.com`
-3. Click **Save**
-4. Wait for DNS check (green checkmark)
-5. Enable "Enforce HTTPS" once DNS is verified
-
-### Step 4: Wait for DNS Propagation
-
-- Can take up to 24-48 hours
-- Usually works within 1 hour
-- Check status: `dig www.jaehoonpyon.com`
+If you want to use a custom domain, see [GitHub Pages custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
 ## Update Workflow
 

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TaleMate - Jaehoon Pyon Research',
     description: 'Conversational agent for parent-child reading activities',
-    url: 'https://www.jaehoonpyon.com/research/talemate',
+    url: 'https://pieon.github.io/research/talemate',
     type: 'article',
   },
 };
